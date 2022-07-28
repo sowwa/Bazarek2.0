@@ -12,7 +12,7 @@ public abstract class Product {
     public BigDecimal Price;
     public Unit Unit;
     public Date ExpirationDate;
-    public Locale CountryOfOrigin; //todo: make enum? or class with countries codes
+   // public Locale CountryOfOrigin; //todo: make enum? or class with countries codes
     //todo: for currency type Currency check it also Money and Currency API (JSR 354).
     //todo: add edible level between product and beverages/food
     private static AtomicInteger count = new AtomicInteger(0);

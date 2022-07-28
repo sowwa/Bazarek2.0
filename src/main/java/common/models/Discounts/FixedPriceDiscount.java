@@ -1,9 +1,11 @@
 package common.models.Discounts;
 
 import common.models.Product;
+import common.models.Shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FixedPriceDiscount extends Discount{
@@ -15,9 +17,22 @@ public class FixedPriceDiscount extends Discount{
         this.RequiredQty = RequiredQty;
     }
 
-    //todo: in this case method param not necessary - think about it
     @Override
-    public BigDecimal CalculateDiscountPrice(Iterable<Product> discountedProducts) {
+    public BigDecimal CalculateDiscountPrice(List<CartProduct> discountedProducts) {
+        for (var product: discountedProducts) {
+            product.DiscountedPrice = FixedPrice;
+            product.Discount.Applied = true;
+        }
         return FixedPrice;
+    }
+
+    @Override
+    public BigDecimal RemoveDiscount(List<CartProduct> discountedProducts) {
+        for (var product: discountedProducts) {
+            product.DiscountedPrice = null;
+            product.Discount.Applied = false;
+        }
+
+        return null;
     }
 }

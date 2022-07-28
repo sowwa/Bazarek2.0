@@ -44,6 +44,11 @@ public class Main {
 
         //assert d1 != null;
         System.out.println("Cart items: "+ productsInCartCount + " product Id " + bP1.Id + " \n discout for beer " + d1.Id);
+
+        //test jason file reading
+
+
+
         var console = System.console();
         if(console != null){
             console.writer().println("aaaaaaa");

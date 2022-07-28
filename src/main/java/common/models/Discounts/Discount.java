@@ -22,5 +22,6 @@ public abstract class Discount {
         Id = count.incrementAndGet();
     }
     //todo: add to discounted Products and remove
-    public abstract BigDecimal CalculateDiscountPrice(Iterable<Product> discountedProducts);
+    public abstract BigDecimal CalculateDiscountPrice(List<CartProduct> discountedProducts);
+    public abstract BigDecimal RemoveDiscount(List<CartProduct> discountedProducts);
 }
