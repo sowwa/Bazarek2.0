@@ -1,35 +1,34 @@
 package common.models.Shop;
 
-import common.models.Discounts.Discount;
 import common.models.Product;
 
 import java.math.BigDecimal;
 
 public class CartProduct {
-    public Product Product;
-    public int Qty; //todo: what about grams?
-    public BigDecimal Price;
-    public BigDecimal DiscountedPrice;
-    public CartProductDiscount Discount;//todo: make list, and make separate class CartDiscout with false true for apply
+    public Product product;
+    public int qty; //todo: what about grams?
+    public BigDecimal price;
+    public BigDecimal discountedPrice;
+    public CartProductDiscount discount;//todo: make list, and make separate class CartDiscout with false true for apply
 
-    public CartProduct(Product Product, int Qty, CartProductDiscount Discount){
-        this.Product = Product;
-        this.Qty = Qty;
-        this.Discount = Discount;
+    public CartProduct(Product product, int qty, CartProductDiscount discount){
+        this.product = product;
+        this.qty = qty;
+        this.discount = discount;
     }
 
-    public BigDecimal GetPrice(){
-        return Price;
+    public BigDecimal getPrice(){
+        return price;
     }
-    public BigDecimal CalculatePrice(){
-        return Price.multiply(BigDecimal.valueOf(Qty));
+    public BigDecimal calculatePrice(){
+        return price.multiply(BigDecimal.valueOf(qty));
     }
 
-    public BigDecimal CalculateDiscountedPrice(){
+    public BigDecimal calculateDiscountedPrice(){
         //todo: choose the best discount
         //DiscountedPrice = Discount.CalculateDiscountPrice();
         //todo: what about different type of bread
-        return DiscountedPrice;
+        return discountedPrice;
     }
 
    // public int AdjustQty(int diffQty){

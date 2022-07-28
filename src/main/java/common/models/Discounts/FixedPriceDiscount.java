@@ -1,36 +1,42 @@
 package common.models.Discounts;
 
-import common.models.Product;
 import common.models.Shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FixedPriceDiscount extends Discount{
-    public BigDecimal FixedPrice;
-    public int RequiredQty;
+    public BigDecimal fixedPrice;
+    public int requiredQty;
 
-    public FixedPriceDiscount(List<Integer> ProductsIds, Unit ProductUnit, int RequiredQty) {
-        super(ProductsIds, ProductUnit);
-        this.RequiredQty = RequiredQty;
+    public FixedPriceDiscount(List<Integer> productsIds, Unit productUnit, int requiredQty) {
+        super(productsIds, productUnit);
+        this.requiredQty = requiredQty;
     }
 
     @Override
-    public BigDecimal CalculateDiscountPrice(List<CartProduct> discountedProducts) {
+    public boolean checkIfApplies(List<CartProduct> discountedProducts){
+        var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
+
+        return qty % requiredQty == 0;
+    }
+
+    @Override
+    public BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts) {
         for (var product: discountedProducts) {
-            product.DiscountedPrice = FixedPrice;
-            product.Discount.Applied = true;
+            product.discountedPrice = fixedPrice;
+            product.discount.applied = true;
         }
-        return FixedPrice;
+        return fixedPrice;
     }
 
     @Override
-    public BigDecimal RemoveDiscount(List<CartProduct> discountedProducts) {
+    public BigDecimal removeDiscount(List<CartProduct> discountedProducts) {
         for (var product: discountedProducts) {
-            product.DiscountedPrice = null;
-            product.Discount.Applied = false;
+            product.discountedPrice = null;
+            product.discount.applied = false;
         }
 
         return null;

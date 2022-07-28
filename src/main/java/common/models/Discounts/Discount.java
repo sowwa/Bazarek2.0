@@ -1,27 +1,25 @@
 package common.models.Discounts;
 
-import common.models.Product;
 import common.models.Shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Discount {
-    public int Id;
-    public List<Integer> ProductsIds;
-    public Unit ProductUnit;
+    public int id;
+    public List<Integer> productsIds;
+    public Unit productUnit;
     //todo: add methods: Calculate price, check discount(maybe in other place, cart?)
-
     private static AtomicInteger count = new AtomicInteger(0);
-    public Discount(List<Integer> ProductsIds, Unit ProductUnit){
-        this.ProductUnit = ProductUnit;
-        this.ProductsIds = ProductsIds;
-        Id = count.incrementAndGet();
+    public Discount(List<Integer> productsIds, Unit productUnit){
+        this.productUnit = productUnit;
+        this.productsIds = productsIds;
+        id = count.incrementAndGet();
     }
     //todo: add to discounted Products and remove
-    public abstract BigDecimal CalculateDiscountPrice(List<CartProduct> discountedProducts);
-    public abstract BigDecimal RemoveDiscount(List<CartProduct> discountedProducts);
+    public abstract boolean checkIfApplies(List<CartProduct> discountedProducts);
+    public abstract BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts);
+    public abstract BigDecimal removeDiscount(List<CartProduct> discountedProducts);
 }

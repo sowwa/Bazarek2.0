@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public abstract class Food extends Product {
 
-    public Food(String Name, BigDecimal Price) {
-        super(Name, Price);
+    public Food(String name, BigDecimal price) {
+        super(name, price);
     }
 }

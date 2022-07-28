@@ -4,19 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Updqate CartProduct with Price and DiscountedPrice properties">
-      <change afterPath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProductDiscount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/common/models/Shop/Shop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/products.json" afterDir="false" />
+    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Add apply discount first draft implementation + add remove discount first draft">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Alcohol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Alcohol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/BeveragePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Beverages/BeveragePack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Discounts/Discount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/FixedPriceDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Discounts/FixedPriceDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/PercentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Discounts/PercentageDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/XForYDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Discounts/XForYDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Bread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Food/Bread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Food/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Food/Vegetable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Shop/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProductDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProductDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/products.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,10 +59,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "P:/Projekty/java/Bazarek2/Bazarek2/src/main/java",
+    "last_opened_file_path": "P:/Projekty/java/Bazarek2/Bazarek2",
     "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -124,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658954676521</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add apply discount first draft implementation + add remove discount first draft">
+      <created>1659041162704</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1659041162704</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,14 +156,15 @@
     <MESSAGE value="Add fisrt draft of Products, discounts and other releted classes + first draft off adding to basket" />
     <MESSAGE value="Add incremented Product and Discount Id + play with discount list" />
     <MESSAGE value="Updqate CartProduct with Price and DiscountedPrice properties" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updqate CartProduct with Price and DiscountedPrice properties" />
+    <MESSAGE value="Add apply discount first draft implementation + add remove discount first draft" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add apply discount first draft implementation + add remove discount first draft" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/src/main/java/common/models/Discounts/PercentageDiscount.java</url>
-          <line>13</line>
+          <line>12</line>
           <properties field="MaxQty" class="common.models.Discounts.PercentageDiscount" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
