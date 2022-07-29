@@ -1,4 +1,4 @@
-package common.models.Shop;
+package common.models.shop;
 
 public class Shop {
     //list of products

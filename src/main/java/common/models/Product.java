@@ -16,9 +16,10 @@ public abstract class Product {
     //todo: add edible level between product and beverages/food
     private static AtomicInteger count = new AtomicInteger(0);
 
-    public Product(String Name, BigDecimal Price){
+    public Product(String Name, BigDecimal Price, Date expirationDate){
         this.name = Name;
         this.price = Price;
+        this.expirationDate = expirationDate;
         id = count.incrementAndGet();
     }
 }

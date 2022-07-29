@@ -1,9 +1,9 @@
-package common.models.Shop;
+package common.models.shop;
 
-import common.models.Discounts.Discount;
+import common.models.discounts.Discount;
 
 public class CartProductDiscount {
-    public common.models.Discounts.Discount discount;
+    public common.models.discounts.Discount discount;
     public boolean applied;
 
     public CartProductDiscount(Discount discount, boolean applied){

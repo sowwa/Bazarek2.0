@@ -1,9 +1,11 @@
-package common.models.Shop;
+package common.models.shop;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Cart {
+    //todo: add cart Id and other classes that may need it
     public List<CartProduct> cartProducts;
     public Cart(){
         cartProducts = new ArrayList<CartProduct>();
@@ -24,6 +26,7 @@ public class Cart {
         //todo: check all discounts for product Id or for CartProduct
         if(cartProduct.discount != null && !cartProduct.discount.applied){
             var otherProducts  = cartProducts.stream()
+                    .filter(p -> Objects.nonNull(p.discount))
                     .filter(p -> p.discount.discount.id == cartProduct.discount.discount.id).toList(); //current product will be included
             //todo: qtyincart
            // var potentailDiscountedProducts = new ArrayList<CartProduct>(otherProducts);

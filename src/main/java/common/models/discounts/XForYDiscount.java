@@ -1,6 +1,6 @@
-package common.models.Discounts;
+package common.models.discounts;
 
-import common.models.Shop.CartProduct;
+import common.models.shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
@@ -13,8 +13,10 @@ public class XForYDiscount extends Discount {
     public int xCount;
     public int yCount;
 
-    public XForYDiscount(List<Integer> ProductsIds, Unit ProductUnit) {
+    public XForYDiscount(List<Integer> ProductsIds, Unit ProductUnit, int xCount, int yCount) {
         super(ProductsIds, ProductUnit);
+        this.xCount = xCount;
+        this.yCount = yCount;
     }
 //discountList.stream().filter(d -> d.ProductsIds.contains(b1.Id)).findFirst().orElse(null);
     //todo: or change it to calculate % off and apply to all products
@@ -29,19 +31,20 @@ public class XForYDiscount extends Discount {
     @Override
     public BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts) {
         discountedProducts = (ArrayList<CartProduct>) discountedProducts.stream().sorted(Comparator.comparing(CartProduct::getPrice)).collect(Collectors.toList());//todo: refactor this
+        var qty = (Integer) discountedProducts.stream().map(p -> p.qty).mapToInt(Integer::intValue).sum();
+        var multiplier = (int) Math.floor(qty / xCount) ;
         //todo: add checking date
-        var toDiscout = xCount - yCount;
+        var toDiscout = (xCount - yCount)*multiplier;
         for (var product:discountedProducts) {
             for(int i = 0; i<product.qty; i++){
                 if(toDiscout == 0){
                     break;
                 }
-                product.discountedPrice = product.discountedPrice.subtract(product.product.price);
+                product.discountValue = product.discountValue.add(product.product.price.multiply(new BigDecimal(-1)));
                 product.discount.applied = true;
                 toDiscout--;
             }
         }
-        //todo: lowest for free
         return null;
     }
 
@@ -49,7 +52,7 @@ public class XForYDiscount extends Discount {
     @Override
     public BigDecimal removeDiscount(List<CartProduct> discountedProducts) {
         for (var product: discountedProducts) {
-            product.discountedPrice = null;
+            product.discountValue = null;
             product.discount.applied = false;
         }
         return null;

@@ -1,4 +1,4 @@
-package common.models.Shop;
+package common.models.shop;
 
 import common.models.Product;
 
@@ -8,13 +8,16 @@ public class CartProduct {
     public Product product;
     public int qty; //todo: what about grams?
     public BigDecimal price;
-    public BigDecimal discountedPrice;
-    public CartProductDiscount discount;//todo: make list, and make separate class CartDiscout with false true for apply
+    public BigDecimal discountValue; //todo: change to discount or sth to have it minus as a record on recipt
+    //todo: or maybe each product has discounted value
+    public CartProductDiscount discount;//todo: make list, and rename
 
     public CartProduct(Product product, int qty, CartProductDiscount discount){
         this.product = product;
         this.qty = qty;
         this.discount = discount;
+        this.discountValue = BigDecimal.ZERO;
+        this.price = product.price.multiply(new BigDecimal(qty));//todo: refactor this
     }
 
     public BigDecimal getPrice(){
@@ -28,7 +31,7 @@ public class CartProduct {
         //todo: choose the best discount
         //DiscountedPrice = Discount.CalculateDiscountPrice();
         //todo: what about different type of bread
-        return discountedPrice;
+        return discountValue;
     }
 
    // public int AdjustQty(int diffQty){

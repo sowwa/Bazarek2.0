@@ -1,6 +1,6 @@
-package common.models.Discounts;
+package common.models.discounts;
 
-import common.models.Shop.CartProduct;
+import common.models.shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class Discount {
     public int id;
     public List<Integer> productsIds;
+    //todo: check if unit really needed
     public Unit productUnit;
     //todo: add methods: Calculate price, check discount(maybe in other place, cart?)
     private static AtomicInteger count = new AtomicInteger(0);

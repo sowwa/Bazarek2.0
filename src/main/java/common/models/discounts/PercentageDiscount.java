@@ -1,9 +1,10 @@
-package common.models.Discounts;
+package common.models.discounts;
 
-import common.models.Shop.CartProduct;
+import common.models.shop.CartProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,9 +12,12 @@ import java.util.stream.Collectors;
 public class PercentageDiscount extends Discount{
     public int minQty; //todo: maybe change int to some other type
     public int maxQty;
-    public BigDecimal percentageOff; //todo: change to other type
-    public PercentageDiscount(List<Integer> productsIds, Unit productUnit) {
+    public float percentageOff; //todo: change to other type
+    public PercentageDiscount(List<Integer> productsIds, Unit productUnit, int minQty, int maxQty, float percentageOff) {
         super(productsIds, productUnit);
+        this.minQty = minQty;
+        this.maxQty = maxQty;
+        this.percentageOff = percentageOff;
     }
 
     @Override
@@ -26,8 +30,8 @@ public class PercentageDiscount extends Discount{
     @Override
     public BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts) {
         for (var product : discountedProducts) {
-            var discountedPrice = product.price.multiply(percentageOff);
-            product.discountedPrice = discountedPrice;
+            var discount = product.price.multiply(BigDecimal.valueOf(percentageOff/-100),new MathContext(2));
+            product.discountValue = discount;
             product.discount.applied = true;
         }
         //todo: return some other type
@@ -37,7 +41,7 @@ public class PercentageDiscount extends Discount{
     @Override
     public BigDecimal removeDiscount(List<CartProduct> discountedProducts) {
         for (var product: discountedProducts) {
-            product.discountedPrice = null;
+            product.discountValue = null;
             product.discount.applied = false;
         }
         return null;
