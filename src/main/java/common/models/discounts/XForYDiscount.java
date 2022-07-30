@@ -5,7 +5,6 @@ import common.models.enums.Unit;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,32 +25,41 @@ public class XForYDiscount extends Discount {
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
-        var discountableQty = discountedProducts.stream()
+        var discountableQty = (Integer) discountedProducts.stream()
                 .filter(p -> LocalDate.now().isEqual(p.product.creationDate.plusDays(daysOld)))
                 .map(p -> p.qty)
-                .collect(Collectors.summingInt(Integer::intValue));
+                .mapToInt(Integer::intValue).sum();
 
         return discountableQty >= xQty;
     }
 
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
-        discountedProducts = discountedProducts.stream().sorted(Comparator.comparing(OrderProduct::getPrice)).collect(Collectors.toList());//todo: refactor this
+        discountedProducts = discountedProducts.stream()
+                .filter(p -> LocalDate.now().isEqual(p.product.creationDate.plusDays(daysOld)))
+                .sorted(Comparator.comparing(OrderProduct::getPrice))
+                .collect(Collectors.toList());
 
-        var qty = (Integer) discountedProducts.stream()
+        var discountableQty = discountedProducts.stream()
                 .map(p -> p.qty)
                 .mapToInt(Integer::intValue).sum();
 
-        var multiplier = (int) Math.floor(qty / xQty) ;
-        var toDiscout = (xQty - yQty)*multiplier;
+        var multiplier = (int) Math.floor(discountableQty / xQty);
+        var qtyToDiscount = (xQty - yQty)*multiplier;
+
         for (var product:discountedProducts) {
-            for(int i = 0; i<product.qty; i++){
-                if(toDiscout == 0){
-                    break;
-                }
-                product.discountValue = product.discountValue.add(product.product.price.multiply(new BigDecimal(-1)));
+            var productQty = product.qty;
+
+            if(qtyToDiscount > productQty){
+                product.discountValue = product.discountValue.add(product.price.multiply(new BigDecimal(-1)));
                 product.discount.applied = true;
-                toDiscout--;
+
+                qtyToDiscount = qtyToDiscount - productQty;
+            }  else {
+                product.discountValue = product.discountValue.add(product.product.price.multiply(new BigDecimal(qtyToDiscount*-1)));
+                product.discount.applied = true;
+
+                break;
             }
         }
     }

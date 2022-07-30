@@ -3,7 +3,6 @@ package common.models.discounts;
 import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,7 +11,7 @@ public abstract class Discount {
     public List<Integer> productsIds;
     //todo: check if unit really needed
     public Unit productUnit;
-    private static AtomicInteger count = new AtomicInteger(0);
+    private static final AtomicInteger count = new AtomicInteger(0);
     public Discount(List<Integer> productsIds, Unit productUnit){
         this.productUnit = productUnit;
         this.productsIds = productsIds;

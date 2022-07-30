@@ -1,9 +1,11 @@
 package org.main;
 
+import common.models.discounts.PercentageDiscount;
 import common.models.discounts.XForYDiscount;
 import common.models.products.beverages.Beer;
 import common.models.discounts.FixedPriceDiscount;
 import common.models.products.food.Bread;
+import common.models.products.food.Vegetable;
 import common.models.shop.Order;
 import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
@@ -12,7 +14,6 @@ import common.models.shop.OrderProductDiscount;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,11 +27,11 @@ public class Main {
 
         //1.1: test beer discount - separate beers
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
-        var belgBeer2 = new Beer("22Belgium", new BigDecimal(7), LocalDate.now());
-        var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<Integer>(){{add(belgBeer.id);add(belgBeer2.id);}}, Unit.Piece, 6, new BigDecimal(10));
+        var belgBeer2 = new Beer("22Belgium", new BigDecimal(5), LocalDate.now());
+        var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<Integer>(){{add(belgBeer.id);add(belgBeer2.id);}}, Unit.Piece, 6, new BigDecimal(1));
         var belgBeerCPD = new OrderProductDiscount(belgBeerDiscount, false);
         var bCP = new OrderProduct(belgBeer, 4, belgBeerCPD);
-        var bCP2 = new OrderProduct(belgBeer2, 3, belgBeerCPD);
+        var bCP2 = new OrderProduct(belgBeer2, 4, belgBeerCPD);
 
         cart.addToCart(bCP);
         cart.addToCart(bCP2);
@@ -51,13 +52,15 @@ public class Main {
         //2.1: test bread discount - 2for1
         var cartB = new Order();
 var ff = LocalDate.now();
-        var bread = new Bread("Belgium", new BigDecimal(10), LocalDate.of(2022, 07, 28), 22);
-        var bread2 = new Bread("22Belgium", new BigDecimal(3), LocalDate.of(2022, 07, 29), 22);
-        var breadDiscount = new XForYDiscount(new ArrayList<Integer>(){{add(bread.id);add(bread2.id);}},
-                Unit.Piece, 2, 1, 2);
+        var bread = new Bread("Bread", new BigDecimal(1), LocalDate.of(2022, 07, 28), 22);
+        var bread2 = new Bread("22Belgium", new BigDecimal(3), LocalDate.of(2022, 07, 28), 22);
+        var bread3 = new Bread("aaaa22Belgium", new BigDecimal(3), LocalDate.of(2022, 07, 28), 22);
+        var breadDiscount = new XForYDiscount(new ArrayList<Integer>(){{add(bread.id);add(bread2.id);add(bread3.id);}},
+                Unit.Piece, 3, 2, 2);
         var breadCPD = new OrderProductDiscount(breadDiscount, false);
         var breadCP = new OrderProduct(bread, 1, breadCPD);
-        var breadCP2 = new OrderProduct(bread2, 1, breadCPD);
+        var breadCP2 = new OrderProduct(bread2, 5, breadCPD);
+        var breadCP3 = new OrderProduct(bread3, 1, breadCPD);
 
         cartB.addToCart(breadCP);
         cartB.addToCart(breadCP2);
@@ -77,30 +80,30 @@ var ff = LocalDate.now();
 
         //3.1: test veggie discount - 0-100g
 
-      /*  var cartV = new Cart();
+       var cartV = new Order();
 
-        var vegg = new Vegetable("Belgium", new BigDecimal(10), new Date(), 110);
-        var vegg2 = new Vegetable("22Belgium", new BigDecimal(20), new Date(), 50);
-        var vegg2q = new Vegetable("qqq", new BigDecimal(100), new Date(), 30);
+        var vegg = new Vegetable("Veggies", new BigDecimal(10), LocalDate.now(), 110);
+        var vegg2 = new Vegetable("22Belgium", new BigDecimal(20), LocalDate.now(), 50);
+        var vegg2q = new Vegetable("qqq", new BigDecimal(100), LocalDate.now(), 30);
         var veggDiscount = new PercentageDiscount(new ArrayList<Integer>(){{add(vegg.id);add(vegg2.id);}},
                 Unit.Piece, 100 , 200, 10);
-        var veggCPD = new CartProductDiscount(veggDiscount, false);
-        var veggCP = new CartProduct(vegg, 1, veggCPD);
-        var veggCP2 = new CartProduct(vegg2, 1, veggCPD);
-        var veggCP233 = new CartProduct(vegg2q, 1, null);
+        var veggCPD = new OrderProductDiscount(veggDiscount, false);
+        var veggCP = new OrderProduct(vegg, 1, veggCPD);
+        var veggCP2 = new OrderProduct(vegg2, 1, veggCPD);
+        var veggCP233 = new OrderProduct(vegg2q, 1, veggCPD);
 
         cartV.addToCart(veggCP);
         cartV.addToCart(veggCP2);
         cartV.addToCart(veggCP233);
         cartV.checkForDiscounts(veggCP2);
-        var e3 = (PercentageDiscount) cartV.cartProducts.get(0).discount.discount;
-        System.out.println("\n\n\nCart items: "+ cartV.cartProducts.size()
-                + "\nproduct name: " + cartV.cartProducts.get(0).product.name
-                + "\nproduct price: " + cartV.cartProducts.get(0).product.price
+        var e3 = (PercentageDiscount) cartV.orderProducts.get(0).discount.discount;
+        System.out.println("\n\n\nCart items: "+ cartV.orderProducts.size()
+                + "\nproduct name: " + cartV.orderProducts.get(0).product.name
+                + "\nproduct price: " + cartV.orderProducts.get(0).product.price
                 //+ "\ndiscout for beer: " + e2.fixedPrice
-                + "\nprice: "+ cartV.cartProducts.get(0).price.add(cartV.cartProducts.get(1).price).add(cartV.cartProducts.get(2).price)
-                + "\ndiscount value: " + cartV.cartProducts.get(0).discountValue.add(cartV.cartProducts.get(1).discountValue).add(cartV.cartProducts.get(2).discountValue)
-        );*/
+                + "\nprice: "+ cartV.orderProducts.get(0).price.add(cartV.orderProducts.get(1).price).add(cartV.orderProducts.get(2).price)
+                + "\ndiscount value: " + cartV.orderProducts.get(0).discountValue.add(cartV.orderProducts.get(1).discountValue).add(cartV.orderProducts.get(2).discountValue)
+        );
 
 
         //3.2: test veggie discount - 100-500g

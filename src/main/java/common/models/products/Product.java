@@ -12,7 +12,7 @@ public abstract class Product {
     public Unit unit;
     public LocalDate creationDate;
     //todo: for currency type Currency check it also Money and Currency API (JSR 354).
-    private static AtomicInteger count = new AtomicInteger(0);
+    private static final AtomicInteger count = new AtomicInteger(0);
 
     public Product(String name, BigDecimal price, LocalDate creationDate){
         this.name = name;

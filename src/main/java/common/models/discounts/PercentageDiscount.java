@@ -6,7 +6,6 @@ import common.models.enums.Unit;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.List;
-import java.util.stream.Collectors;
 
 //todo: think about grams vs unit
 public class PercentageDiscount extends Discount{
@@ -22,7 +21,9 @@ public class PercentageDiscount extends Discount{
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
-        var discountableQty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
+        int discountableQty = discountedProducts.stream()
+                .map(p -> p.qty)
+                .mapToInt(Integer::intValue).sum();
 
         return discountableQty >= minQty || discountableQty < maxQty;
     }
@@ -30,8 +31,7 @@ public class PercentageDiscount extends Discount{
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
         for (var product : discountedProducts) {
-            var discount = product.price.multiply(BigDecimal.valueOf(percentageOff/-100),new MathContext(2));
-            product.discountValue = discount;
+            product.discountValue = product.price.multiply(BigDecimal.valueOf(percentageOff/-100),new MathContext(2));
             product.discount.applied = true;
         }
     }

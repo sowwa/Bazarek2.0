@@ -6,12 +6,11 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Order {
-    //todo: add cart Id and other classes that may need it
     public int id;
     public List<OrderProduct> orderProducts;
-    private static AtomicInteger count = new AtomicInteger(0);
+    private static final AtomicInteger count = new AtomicInteger(0);
     public Order(){
-        orderProducts = new ArrayList<OrderProduct>();
+        orderProducts = new ArrayList<>();
         id = count.incrementAndGet();
     }
     //todo: make some interface for that or move to other class

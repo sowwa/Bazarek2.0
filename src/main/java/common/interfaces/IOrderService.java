@@ -4,7 +4,6 @@ import common.models.shop.Order;
 import common.models.shop.OrderProduct;
 import common.models.shop.Receipt;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface IOrderService {

@@ -1,6 +1,5 @@
 package common.models.discounts;
 
-import common.models.products.Product;
 import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 
@@ -8,7 +7,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FixedPriceDiscount extends Discount{
     public BigDecimal fixedPrice;
@@ -22,9 +20,9 @@ public class FixedPriceDiscount extends Discount{
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
-        var discountableQty = discountedProducts.stream()
+        var discountableQty = (Integer) discountedProducts.stream()
                 .map(p -> p.qty)
-                .collect(Collectors.summingInt(Integer::intValue));
+                .mapToInt(Integer::intValue).sum();
         if(requiredQty == 0)
             return true; //todo: make sure no exception, or make sure req qty musyt be at least 1
 
@@ -34,7 +32,8 @@ public class FixedPriceDiscount extends Discount{
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
         var discontableProductsQty = (Integer) discountedProducts.stream()
-                .map(p -> p.qty).mapToInt(Integer::intValue).sum();
+                .map(p -> p.qty)
+                .mapToInt(Integer::intValue).sum();
 
         var discountMult = (int) Math.floor(discontableProductsQty / requiredQty) ;
 
@@ -55,29 +54,27 @@ public class FixedPriceDiscount extends Discount{
             var notDiscountedQtyPrice = productQty
                     .subtract(productQtyToDiscount)
                     .multiply(product.product.price);
-            var discountedQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount) == BigDecimal.ZERO
+            var discountedQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount).equals(BigDecimal.ZERO)
                     ? remainingDiscountedPrice
                     : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedPrice);
 
             var productPrice = notDiscountedQtyPrice.add(discountedQtyPrice);
 
-            var discountValue = product.price
+            product.discountValue = product.price
                     .subtract(productPrice)
                     .multiply(new BigDecimal(-1));
-
-            product.discountValue = discountValue;
             product.discount.applied = true;
 
             productsLeftToDiscountQty = productsLeftToDiscountQty.subtract(productQtyToDiscount);
             remainingDiscountedPrice = remainingDiscountedPrice.subtract(discountedQtyPrice);
 
-            if(productsLeftToDiscountQty == BigDecimal.ZERO)
+            if(productsLeftToDiscountQty.equals(BigDecimal.ZERO))
                 break;
         }
     }
 
     private BigDecimal GetProductQtyToDiscount(BigDecimal productsLeftToDiscountQty, BigDecimal productQty){
-        return productsLeftToDiscountQty.compareTo(productQty) == -1
+        return productsLeftToDiscountQty.compareTo(productQty) < 0
                 ? productsLeftToDiscountQty
                 : productQty;
     }

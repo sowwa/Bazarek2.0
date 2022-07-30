@@ -12,7 +12,7 @@ import java.util.List;
 
 public class OrderService implements IOrderService {
     //@Inject private IReceiptService receiptService;//todo: read about DI in java
-    private List<Order> orders; //!!! treat it lika DB
+    private List<Order> orders; //!!! treat it like DB
     private IReceiptService receiptService;
 
     public OrderService(IReceiptService receiptService) {

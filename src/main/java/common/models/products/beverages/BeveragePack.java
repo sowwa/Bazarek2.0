@@ -4,7 +4,6 @@ import common.models.products.Product;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class BeveragePack<T extends Beverage> extends Product {
     //todo: make sure T is of "final" type - only one id - check in method
