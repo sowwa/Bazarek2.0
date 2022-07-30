@@ -4,27 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Add first draft of checking if discount applies + naming refactoring">
-      <change afterPath="$PROJECT_DIR$/src/test/java/CartTests.java" afterDir="false" />
+    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Played with discounts and made a mess">
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IDiscountFlow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IOrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IReceiptService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/FixedPriceDiscountFlow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/PercentageDiscountFlow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/ReceiptService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/XForYDiscountFlow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Alcohol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/beverages/Alcohol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/beverages/Beer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/beverages/Beverage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Beverages/BeveragePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/beverages/BeveragePack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/FixedPriceDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/PercentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Discounts/XForYDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Bread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/food/Bread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/food/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Food/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/food/Vegetable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/CartProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/CartProductDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/CartProductDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Shop/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Shop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/beverages/Alcohol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Alcohol.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/beverages/Beer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/beverages/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beverage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/beverages/BeveragePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/BeveragePack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/food/Bread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Bread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/food/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Vegetable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/CartProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/CartProductDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProductDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Shop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CartTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/OrderTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +65,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -92,9 +101,9 @@
       <recent name="P:\Projekty\java\Bazarek2\Bazarek2\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+  <component name="RunManager" selected="Application.org.main.Main">
+    <configuration name="org.main.Main" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="org.main.Main" />
       <module name="Bazarek2.main" />
       <extension name="coverage">
         <pattern>
@@ -129,9 +138,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.org.main.Main" />
+      <item itemvalue="Gradle.CartTests" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.org.main.Main" />
         <item itemvalue="Gradle.CartTests" />
       </list>
     </recent_temporary>
@@ -187,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659045805307</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Played with discounts and made a mess">
+      <created>1659137292752</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659137292752</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -208,95 +228,16 @@
     <MESSAGE value="Updqate CartProduct with Price and DiscountedPrice properties" />
     <MESSAGE value="Add apply discount first draft implementation + add remove discount first draft" />
     <MESSAGE value="Add first draft of checking if discount applies + naming refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add first draft of checking if discount applies + naming refactoring" />
+    <MESSAGE value="Played with discounts and made a mess" />
+    <option name="LAST_COMMIT_MESSAGE" value="Played with discounts and made a mess" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>68</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>42</line>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>158</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>159</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>160</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>161</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>163</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>166</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>167</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>156</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>171</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>162</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>105</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>96</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
-          <line>97</line>
-          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java</url>
@@ -339,74 +280,69 @@
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="81" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>128</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>102</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>127</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>101</line>
           <option name="timeStamp" value="91" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>125</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>99</line>
           <option name="timeStamp" value="92" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>124</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>98</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>129</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>103</line>
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>123</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>97</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>122</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>96</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>121</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>95</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
-          <line>120</line>
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>94</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="99" />
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="100" />
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="101" />
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/shop/Cart.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="102" />
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

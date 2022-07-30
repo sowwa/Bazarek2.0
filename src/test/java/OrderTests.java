@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CartTests {
+public class OrderTests {
     @Test
     void addToCart(){
         Assertions.assertEquals(1,1);
@@ -14,4 +14,5 @@ public class CartTests {
     @Test
     void checkForDiscounts() {
     }
+    //todo: cant create second receipt based on order
 }

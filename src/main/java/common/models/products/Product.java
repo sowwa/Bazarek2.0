@@ -1,4 +1,4 @@
-package common.models;
+package common.models.products;
 
 import common.models.enums.Unit;
 import java.math.BigDecimal;
@@ -11,14 +11,12 @@ public abstract class Product {
     public BigDecimal price;
     public Unit unit;
     public Date expirationDate;
-   // public Locale CountryOfOrigin; //todo: make enum? or class with countries codes
     //todo: for currency type Currency check it also Money and Currency API (JSR 354).
-    //todo: add edible level between product and beverages/food
     private static AtomicInteger count = new AtomicInteger(0);
 
-    public Product(String Name, BigDecimal Price, Date expirationDate){
-        this.name = Name;
-        this.price = Price;
+    public Product(String name, BigDecimal price, Date expirationDate){
+        this.name = name;
+        this.price = price;
         this.expirationDate = expirationDate;
         id = count.incrementAndGet();
     }

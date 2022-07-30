@@ -3,35 +3,39 @@ package common.models.shop;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
-public class Cart {
+public class Order {
     //todo: add cart Id and other classes that may need it
-    public List<CartProduct> cartProducts;
-    public Cart(){
-        cartProducts = new ArrayList<CartProduct>();
+    public int id;
+    public List<OrderProduct> orderProducts;
+    private static AtomicInteger count = new AtomicInteger(0);
+    public Order(){
+        orderProducts = new ArrayList<OrderProduct>();
+        id = count.incrementAndGet();
     }
     //todo: make some interface for that or move to other class
-    public Iterable<CartProduct> addToCart(CartProduct product){//todo: make it Product and Qty separate args
+    public Iterable<OrderProduct> addToCart(OrderProduct product){//todo: make it Product and Qty separate args
         //todo: see if already in cart
         //todo: google try catch and error handling in java
         //todo: check if product is already in backet
         //todo: this way handle beerPack and beer - give them the same id
-        this.cartProducts.add(product);
+        this.orderProducts.add(product);
         //todo: check if discounts apply or should be removed
 
-        return this.cartProducts;
+        return this.orderProducts;
     }
 
-    public void checkForDiscounts(CartProduct cartProduct){
+    public void checkForDiscounts(OrderProduct orderProduct){
         //todo: check all discounts for product Id or for CartProduct
-        if(cartProduct.discount != null && !cartProduct.discount.applied){
-            var otherProducts  = cartProducts.stream()
+        if(orderProduct.discount != null && !orderProduct.discount.applied){
+            var otherProducts  = orderProducts.stream()
                     .filter(p -> Objects.nonNull(p.discount))
-                    .filter(p -> p.discount.discount.id == cartProduct.discount.discount.id).toList(); //current product will be included
+                    .filter(p -> p.discount.discount.id == orderProduct.discount.discount.id).toList(); //current product will be included
             //todo: qtyincart
            // var potentailDiscountedProducts = new ArrayList<CartProduct>(otherProducts);
 
-            cartProduct.discount.discount.calculateDiscountPrice(otherProducts);
+            orderProduct.discount.discount.calculateDiscountPrice(otherProducts);
 
         }
         //discountList.stream().filter(d -> d.ProductsIds.contains(b1.Id)).findFirst().orElse(null);

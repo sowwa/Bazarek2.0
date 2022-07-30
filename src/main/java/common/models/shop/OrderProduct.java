@@ -1,18 +1,18 @@
 package common.models.shop;
 
-import common.models.Product;
+import common.models.products.Product;
 
 import java.math.BigDecimal;
 
-public class CartProduct {
+public class OrderProduct {
     public Product product;
     public int qty; //todo: what about grams?
     public BigDecimal price;
     public BigDecimal discountValue; //todo: change to discount or sth to have it minus as a record on recipt
     //todo: or maybe each product has discounted value
-    public CartProductDiscount discount;//todo: make list, and rename
+    public OrderProductDiscount discount;//todo: make list, and rename
 
-    public CartProduct(Product product, int qty, CartProductDiscount discount){
+    public OrderProduct(Product product, int qty, OrderProductDiscount discount){
         this.product = product;
         this.qty = qty;
         this.discount = discount;

@@ -1,15 +1,11 @@
-package org.example;
+package org.main;
 
-import common.models.beverages.Beer;
+import common.models.products.beverages.Beer;
 import common.models.discounts.FixedPriceDiscount;
-import common.models.discounts.PercentageDiscount;
-import common.models.discounts.XForYDiscount;
-import common.models.food.Bread;
-import common.models.food.Vegetable;
-import common.models.shop.Cart;
-import common.models.shop.CartProduct;
+import common.models.shop.Order;
+import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
-import common.models.shop.CartProductDiscount;
+import common.models.shop.OrderProductDiscount;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,55 +17,29 @@ public class Main {
         //todo: get carts/receipt from file or hardcode
         //todo: apply discounts (maybe get products, add to cart, check discounts, make checkout print receipts)
         //todo: print receipt
-        //testing area
-      //  BigDecimal price = new BigDecimal(22);
-        //var b1 = new Beer("A", price);
-        //var bP1 = new BeveragePack<Beer>("6pack", price,6, b1);
-
-      ///  var fD1 = new FixedPriceDiscount(new ArrayList<>(){{add(b1.id);}}, Unit.Piece, 6);
-     //   var fD1Pack = new FixedPriceDiscount(new ArrayList<>(){{add(bP1.id);}}, Unit.Piece, 1);
-
-    //    var discountList = new ArrayList<Discount>();
-     //   discountList.add(fD1);
-     //   discountList.add(fD1Pack);
-
-    //    var d1 = discountList.stream().filter(d -> d.productsIds.contains(b1.id)).findFirst().orElse(null);
-
-     //   var cart1 = new Cart();
-     //   var cP1 = new CartProduct(b1, 6, null);
-        //or adding pack as 6 separate beers to the cart
-    //    var cP2 = new CartProduct(bP1, 1, null);
-
-     //   cart1.addToCart(cP1);
-     //   cart1.addToCart(cP2);
-
-      //  var productsInCartCount = cart1.cartProducts.size();
-
-        //assert d1 != null;
-        //System.out.println("Cart items: "+ productsInCartCount + " product Id " + bP1.id + " \n discout for beer " + d1.id);
         //presentation setup
-      /*  var cart = new Cart();
+        var cart = new Order();
 
 
         //1.1: test beer discount - separate beers
-        var belgBeer = new Beer("Belgium", new BigDecimal(2));
-        var belgBeer2 = new Beer("22Belgium", new BigDecimal(2));
+        var belgBeer = new Beer("Belgium", new BigDecimal(2),new Date());
+        var belgBeer2 = new Beer("22Belgium", new BigDecimal(1),new Date());
         var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<Integer>(){{add(belgBeer.id);add(belgBeer2.id);}}, Unit.Piece, 6, new BigDecimal(3));
-        var belgBeerCPD = new CartProductDiscount(belgBeerDiscount, false);
-        var bCP = new CartProduct(belgBeer, 7, belgBeerCPD);
-        var bCP2 = new CartProduct(belgBeer2, 6, belgBeerCPD);
+        var belgBeerCPD = new OrderProductDiscount(belgBeerDiscount, false);
+        var bCP = new OrderProduct(belgBeer, 7, belgBeerCPD);
+        var bCP2 = new OrderProduct(belgBeer2, 6, belgBeerCPD);
 
         cart.addToCart(bCP);
         cart.addToCart(bCP2);
         cart.checkForDiscounts(bCP);
-        var e = (FixedPriceDiscount) cart.cartProducts.get(0).discount.discount;
-        System.out.println("\n\n\nCart items: "+ cart.cartProducts.size()
-                + "\nproduct name: " + cart.cartProducts.get(0).product.name
-                + "\nproduct price: " + cart.cartProducts.get(0).product.price
+        var e = (FixedPriceDiscount) cart.orderProducts.get(0).discount.discount;
+        System.out.println("\n\n\nCart items: "+ cart.orderProducts.size()
+                + "\nproduct name: " + cart.orderProducts.get(0).product.name
+                + "\nproduct price: " + cart.orderProducts.get(0).product.price
                 + "\ndiscout for beer: " + e.fixedPrice
-                + "\nprice: "+ cart.cartProducts.get(0).price.add(cart.cartProducts.get(1).price)
-                + "\ndiscount value: " + cart.cartProducts.get(0).discountValue.add(cart.cartProducts.get(1).discountValue)
-        );*/
+                + "\nprice: "+ cart.orderProducts.get(0).price.add(cart.orderProducts.get(1).price)
+                + "\ndiscount value: " + cart.orderProducts.get(0).discountValue.add(cart.orderProducts.get(1).discountValue)
+        );
 
         //1.2: test beer discount - pack of beer
 
@@ -104,7 +74,7 @@ public class Main {
 
         //3.1: test veggie discount - 0-100g
 
-        var cartV = new Cart();
+      /*  var cartV = new Cart();
 
         var vegg = new Vegetable("Belgium", new BigDecimal(10), new Date(), 110);
         var vegg2 = new Vegetable("22Belgium", new BigDecimal(20), new Date(), 50);
@@ -127,7 +97,7 @@ public class Main {
                 //+ "\ndiscout for beer: " + e2.fixedPrice
                 + "\nprice: "+ cartV.cartProducts.get(0).price.add(cartV.cartProducts.get(1).price).add(cartV.cartProducts.get(2).price)
                 + "\ndiscount value: " + cartV.cartProducts.get(0).discountValue.add(cartV.cartProducts.get(1).discountValue).add(cartV.cartProducts.get(2).discountValue)
-        );
+        );*/
 
 
         //3.2: test veggie discount - 100-500g

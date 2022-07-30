@@ -1,6 +1,6 @@
 package common.models.discounts;
 
-import common.models.shop.CartProduct;
+import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
@@ -21,29 +21,21 @@ public class PercentageDiscount extends Discount{
     }
 
     @Override
-    public boolean checkIfApplies(List<CartProduct> discountedProducts){
+    public boolean checkIfApplies(List<OrderProduct> discountedProducts){
         var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
-        //todo: what if min or max are null?
+
         return qty >= minQty || qty < maxQty;
     }
 
     @Override
-    public BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts) {
+    public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
         for (var product : discountedProducts) {
             var discount = product.price.multiply(BigDecimal.valueOf(percentageOff/-100),new MathContext(2));
             product.discountValue = discount;
             product.discount.applied = true;
         }
         //todo: return some other type
-        return null;
     }
 
-    @Override
-    public BigDecimal removeDiscount(List<CartProduct> discountedProducts) {
-        for (var product: discountedProducts) {
-            product.discountValue = null;
-            product.discount.applied = false;
-        }
-        return null;
-    }
+
 }

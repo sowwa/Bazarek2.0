@@ -1,4 +1,4 @@
-package common.models.beverages;
+package common.models.products.beverages;
 
 import java.math.BigDecimal;
 import java.util.Date;

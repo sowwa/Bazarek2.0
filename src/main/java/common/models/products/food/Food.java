@@ -1,6 +1,6 @@
-package common.models.food;
+package common.models.products.food;
 
-import common.models.Product;
+import common.models.products.Product;
 
 import java.math.BigDecimal;
 import java.util.Date;

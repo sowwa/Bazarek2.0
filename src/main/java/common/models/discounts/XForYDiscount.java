@@ -1,6 +1,6 @@
 package common.models.discounts;
 
-import common.models.shop.CartProduct;
+import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 
 import java.math.BigDecimal;
@@ -22,15 +22,15 @@ public class XForYDiscount extends Discount {
     //todo: or change it to calculate % off and apply to all products
 
     @Override
-    public boolean checkIfApplies(List<CartProduct> discountedProducts){
+    public boolean checkIfApplies(List<OrderProduct> discountedProducts){
         var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
         //todo: what about multification?
         return qty >= xCount;
     }
 
     @Override
-    public BigDecimal calculateDiscountPrice(List<CartProduct> discountedProducts) {
-        discountedProducts = (ArrayList<CartProduct>) discountedProducts.stream().sorted(Comparator.comparing(CartProduct::getPrice)).collect(Collectors.toList());//todo: refactor this
+    public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
+        discountedProducts = (ArrayList<OrderProduct>) discountedProducts.stream().sorted(Comparator.comparing(OrderProduct::getPrice)).collect(Collectors.toList());//todo: refactor this
         var qty = (Integer) discountedProducts.stream().map(p -> p.qty).mapToInt(Integer::intValue).sum();
         var multiplier = (int) Math.floor(qty / xCount) ;
         //todo: add checking date
@@ -45,16 +45,6 @@ public class XForYDiscount extends Discount {
                 toDiscout--;
             }
         }
-        return null;
     }
 
-    //todo: same method in all discounts think about refactoring
-    @Override
-    public BigDecimal removeDiscount(List<CartProduct> discountedProducts) {
-        for (var product: discountedProducts) {
-            product.discountValue = null;
-            product.discount.applied = false;
-        }
-        return null;
-    }
 }
