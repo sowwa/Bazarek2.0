@@ -1,13 +1,16 @@
 package org.main;
 
+import common.models.discounts.XForYDiscount;
 import common.models.products.beverages.Beer;
 import common.models.discounts.FixedPriceDiscount;
+import common.models.products.food.Bread;
 import common.models.shop.Order;
 import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 import common.models.shop.OrderProductDiscount;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -22,12 +25,12 @@ public class Main {
 
 
         //1.1: test beer discount - separate beers
-        var belgBeer = new Beer("Belgium", new BigDecimal(2),new Date());
-        var belgBeer2 = new Beer("22Belgium", new BigDecimal(1),new Date());
-        var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<Integer>(){{add(belgBeer.id);add(belgBeer2.id);}}, Unit.Piece, 6, new BigDecimal(3));
+        var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
+        var belgBeer2 = new Beer("22Belgium", new BigDecimal(7), LocalDate.now());
+        var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<Integer>(){{add(belgBeer.id);add(belgBeer2.id);}}, Unit.Piece, 6, new BigDecimal(10));
         var belgBeerCPD = new OrderProductDiscount(belgBeerDiscount, false);
-        var bCP = new OrderProduct(belgBeer, 7, belgBeerCPD);
-        var bCP2 = new OrderProduct(belgBeer2, 6, belgBeerCPD);
+        var bCP = new OrderProduct(belgBeer, 4, belgBeerCPD);
+        var bCP2 = new OrderProduct(belgBeer2, 3, belgBeerCPD);
 
         cart.addToCart(bCP);
         cart.addToCart(bCP2);
@@ -46,27 +49,27 @@ public class Main {
         //1.3: test beer discount - separate beers + pack of beer
 
         //2.1: test bread discount - 2for1
-      /*  var cartB = new Cart();
-
-        var bread = new Bread("Belgium", new BigDecimal(10), new Date());
-        var bread2 = new Bread("22Belgium", new BigDecimal(3), new Date());
+        var cartB = new Order();
+var ff = LocalDate.now();
+        var bread = new Bread("Belgium", new BigDecimal(10), LocalDate.of(2022, 07, 28), 22);
+        var bread2 = new Bread("22Belgium", new BigDecimal(3), LocalDate.of(2022, 07, 29), 22);
         var breadDiscount = new XForYDiscount(new ArrayList<Integer>(){{add(bread.id);add(bread2.id);}},
-                Unit.Piece, 2, 1);
-        var breadCPD = new CartProductDiscount(breadDiscount, false);
-        var breadCP = new CartProduct(bread, 1, breadCPD);
-        var breadCP2 = new CartProduct(bread2, 1, breadCPD);
+                Unit.Piece, 2, 1, 2);
+        var breadCPD = new OrderProductDiscount(breadDiscount, false);
+        var breadCP = new OrderProduct(bread, 1, breadCPD);
+        var breadCP2 = new OrderProduct(bread2, 1, breadCPD);
 
         cartB.addToCart(breadCP);
         cartB.addToCart(breadCP2);
         cartB.checkForDiscounts(breadCP2);
-        var e2 = (XForYDiscount) cartB.cartProducts.get(0).discount.discount;
-        System.out.println("\n\n\nCart items: "+ cartB.cartProducts.size()
-                + "\nproduct name: " + cartB.cartProducts.get(0).product.name
-                + "\nproduct price: " + cartB.cartProducts.get(0).product.price
+        var e2 = (XForYDiscount) cartB.orderProducts.get(0).discount.discount;
+        System.out.println("\n\n\nCart items: "+ cartB.orderProducts.size()
+                + "\nproduct name: " + cartB.orderProducts.get(0).product.name
+                + "\nproduct price: " + cartB.orderProducts.get(0).product.price
                 //+ "\ndiscout for beer: " + e2.fixedPrice
-                + "\nprice: "+ cartB.cartProducts.get(0).price.add(cartB.cartProducts.get(1).price)
-                + "\ndiscount value: " + cartB.cartProducts.get(0).discountValue.add(cartB.cartProducts.get(1).discountValue)
-        );*/
+                + "\nprice: "+ cartB.orderProducts.get(0).price.add(cartB.orderProducts.get(1).price)
+                + "\ndiscount value: " + cartB.orderProducts.get(0).discountValue.add(cartB.orderProducts.get(1).discountValue)
+        );
 
         //2.2: test bread discount - 3for1
 

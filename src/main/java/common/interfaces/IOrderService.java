@@ -15,5 +15,5 @@ public interface IOrderService {
     List<Order> AddProduct(int orderId,OrderProduct product);
     List<Order> RemoveProduct(int orderId, int productId);
     Order CalculateTotalPrice(int orderId); //todo: think if neccesary
-    Receipt PrintReceipt(int orderId); //todo: rename maybe to finish order
+    Receipt PrintReceipt(int orderId); //todo: rename maybe to finish order: FINISHORDER?
 }

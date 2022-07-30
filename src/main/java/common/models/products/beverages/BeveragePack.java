@@ -3,6 +3,7 @@ package common.models.products.beverages;
 import common.models.products.Product;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class BeveragePack<T extends Beverage> extends Product {
@@ -10,8 +11,8 @@ public class BeveragePack<T extends Beverage> extends Product {
     public int qty;
     public T beverage;
 
-    public BeveragePack(String name, BigDecimal price, int qty, T beverage, Date expirationDate){
-        super(name, price, expirationDate);
+    public BeveragePack(String name, BigDecimal price, int qty, T beverage, LocalDate creationDate){
+        super(name, price, creationDate);
         this.beverage = beverage;
         this.qty = qty;
     }

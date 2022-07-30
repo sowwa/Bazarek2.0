@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class PercentageDiscount extends Discount{
     public int minQty; //todo: maybe change int to some other type
     public int maxQty;
-    public float percentageOff; //todo: change to other type
+    public float percentageOff; 
     public PercentageDiscount(List<Integer> productsIds, Unit productUnit, int minQty, int maxQty, float percentageOff) {
         super(productsIds, productUnit);
         this.minQty = minQty;
@@ -22,9 +22,9 @@ public class PercentageDiscount extends Discount{
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
-        var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
+        var discountableQty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
 
-        return qty >= minQty || qty < maxQty;
+        return discountableQty >= minQty || discountableQty < maxQty;
     }
 
     @Override
@@ -34,8 +34,5 @@ public class PercentageDiscount extends Discount{
             product.discountValue = discount;
             product.discount.applied = true;
         }
-        //todo: return some other type
     }
-
-
 }

@@ -1,5 +1,6 @@
 package common.models.discounts;
 
+import common.models.products.Product;
 import common.models.shop.OrderProduct;
 import common.models.enums.Unit;
 
@@ -21,52 +22,63 @@ public class FixedPriceDiscount extends Discount{
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
+        var discountableQty = discountedProducts.stream()
+                .map(p -> p.qty)
+                .collect(Collectors.summingInt(Integer::intValue));
+        if(requiredQty == 0)
+            return true; //todo: make sure no exception, or make sure req qty musyt be at least 1
 
-        var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
-
-        return qty % requiredQty == 0;
+        return discountableQty / requiredQty >= 1;
     }
-    //version when price must be this same
+
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
-        var qty = discountedProducts.stream().map(p -> p.qty).collect(Collectors.summingInt(Integer::intValue));
-        var multiplier = (int) Math.floor(qty / requiredQty) ;
-        var wholeDiscountedPrice = fixedPrice.multiply(new BigDecimal(multiplier));
-        var wholeDiscountedPrice2 = fixedPrice.multiply(new BigDecimal(multiplier));
+        var discontableProductsQty = (Integer) discountedProducts.stream()
+                .map(p -> p.qty).mapToInt(Integer::intValue).sum();
 
-        var discountedItemsQty = new BigDecimal(multiplier * requiredQty);
-        var itemsToDiscount = new BigDecimal(multiplier * requiredQty);
+        var discountMult = (int) Math.floor(discontableProductsQty / requiredQty) ;
+
+        if(discountMult == 0)
+            return;
+
+        var discountedPrice = fixedPrice.multiply(new BigDecimal(discountMult)); //todo: can fixed proce be 0
+        var remainingDiscountedPrice = fixedPrice.multiply(new BigDecimal(discountMult));
+
+        var discountedProductsQty = new BigDecimal(discountMult * requiredQty);
+        var productsLeftToDiscountQty = new BigDecimal(discountMult * requiredQty);
 
         for(var product : discountedProducts){
-            var thisQtyToDiscount = BigDecimal.ZERO;
-            var thisProdQty = new BigDecimal(product.qty);
-            if(itemsToDiscount.compareTo(thisProdQty) == 1 ||
-                    itemsToDiscount.compareTo(thisProdQty) == 0){
-                thisQtyToDiscount = new BigDecimal(product.qty);
-            } else
-            if(itemsToDiscount.compareTo(thisProdQty) == -1){
-                thisQtyToDiscount = itemsToDiscount;
-            }
-            MathContext mc=new MathContext(2, RoundingMode.DOWN);
+            var mc=new MathContext(2, RoundingMode.DOWN);//todo: make it in class
+            var productQty = new BigDecimal(product.qty);
 
-            var productsNotOnPromotion = thisProdQty.subtract(thisQtyToDiscount);
+            var productQtyToDiscount = GetProductQtyToDiscount(productsLeftToDiscountQty, productQty);
+            var notDiscountedQtyPrice = productQty
+                    .subtract(productQtyToDiscount)
+                    .multiply(product.product.price);
+            var discountedQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount) == BigDecimal.ZERO
+                    ? remainingDiscountedPrice
+                    : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedPrice);
 
-            var nonDiscountprice = productsNotOnPromotion.multiply(product.product.price);
-            var cos = thisQtyToDiscount.divide(discountedItemsQty,mc).multiply(wholeDiscountedPrice);
-            if(itemsToDiscount.subtract(thisQtyToDiscount) == BigDecimal.ZERO)
-                cos = wholeDiscountedPrice2;
-            var sum = nonDiscountprice.add(cos);
+            var productPrice = notDiscountedQtyPrice.add(discountedQtyPrice);
 
-            var wynik = product.price.subtract(sum).multiply(new BigDecimal(-1));
-            itemsToDiscount = itemsToDiscount.subtract(thisQtyToDiscount);
+            var discountValue = product.price
+                    .subtract(productPrice)
+                    .multiply(new BigDecimal(-1));
 
-            product.discountValue = wynik;
+            product.discountValue = discountValue;
             product.discount.applied = true;
-            //todo: what if some products left?
-            wholeDiscountedPrice2 = wholeDiscountedPrice2.subtract(cos);
-            if(itemsToDiscount == BigDecimal.ZERO)
+
+            productsLeftToDiscountQty = productsLeftToDiscountQty.subtract(productQtyToDiscount);
+            remainingDiscountedPrice = remainingDiscountedPrice.subtract(discountedQtyPrice);
+
+            if(productsLeftToDiscountQty == BigDecimal.ZERO)
                 break;
         }
     }
 
+    private BigDecimal GetProductQtyToDiscount(BigDecimal productsLeftToDiscountQty, BigDecimal productQty){
+        return productsLeftToDiscountQty.compareTo(productQty) == -1
+                ? productsLeftToDiscountQty
+                : productQty;
+    }
 }

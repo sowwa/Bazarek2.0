@@ -16,7 +16,7 @@ public class Order {
     }
     //todo: make some interface for that or move to other class
     public Iterable<OrderProduct> addToCart(OrderProduct product){//todo: make it Product and Qty separate args
-        //todo: see if already in cart
+        // todo: see if already in cart
         //todo: google try catch and error handling in java
         //todo: check if product is already in backet
         //todo: this way handle beerPack and beer - give them the same id
@@ -34,7 +34,7 @@ public class Order {
                     .filter(p -> p.discount.discount.id == orderProduct.discount.discount.id).toList(); //current product will be included
             //todo: qtyincart
            // var potentailDiscountedProducts = new ArrayList<CartProduct>(otherProducts);
-
+            var t = orderProduct.discount.discount.checkIfApplies(otherProducts);
             orderProduct.discount.discount.calculateDiscountPrice(otherProducts);
 
         }
