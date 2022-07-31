@@ -3,12 +3,12 @@ package common.models.receipt;
 import java.math.BigDecimal;
 
 public class ReceiptRecord {
-    private String name;
-    private String qty;
-    private String unitPrice;
-    private String fullPrice;
-    private String discount;
-    private String discountName;
+    private final String name;
+    private final String qty;
+    private final String unitPrice;
+    private final String fullPrice;
+    private final String discount;
+    private final String discountName;
 
     public ReceiptRecord(String name, int qty, BigDecimal unitPrice, BigDecimal fullPrice, BigDecimal discount, String discountName) {
         this.name = name;
@@ -27,7 +27,7 @@ public class ReceiptRecord {
 
     public void print(){
         System.out.println("\n" + name + "   "
-                + qty + "*" + unitPrice + "   "
+                + qty + "*" + unitPrice + "           "
                 + fullPrice);
 
         if(!discount.equals(""))

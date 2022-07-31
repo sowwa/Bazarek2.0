@@ -43,7 +43,7 @@ public class PercentageDiscount extends Discount{
                 .mapToInt(Integer::intValue).sum();
 
         if(minQty != null && maxQty != null)
-            return discountableQty >= minQty && discountableQty < maxQty;
+            return discountableQty > minQty && discountableQty <= maxQty;
 
         return minQty == null ? discountableQty < maxQty : discountableQty > minQty;
     }

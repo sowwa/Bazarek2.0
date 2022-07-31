@@ -3,14 +3,14 @@ package common.models.order;
 import common.models.products.Product;
 import common.models.products.food.Bread;
 
-import java.net.Proxy;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Order {
-    private int id;
+    private final int id;
     private List<OrderProduct> orderProducts;
     private static final AtomicInteger count = new AtomicInteger(0);
     public Order(){
@@ -26,7 +26,6 @@ public class Order {
         throw new NoSuchElementException("Product not in order.") ;
     }
     public void addProduct(Product product, int qty){
-        //todo: make sure not to add bread older then 6 days
         if(orderProducts.stream().anyMatch(o -> o.getProduct().getId() == product.getId())){
             orderProducts.stream().filter(o -> o.getProduct().getId() == product.getId())
                     .forEach(o -> setUpdatedValues(o, product, qty));
@@ -42,6 +41,10 @@ public class Order {
     public void modifyProductQty(int productId, int newQty){
         var product = getProduct(productId);
         product.setQty(newQty);
+    }
+    public void modifyProductPrice(int productId, BigDecimal newPrice){
+        var product = getProduct(productId);
+        product.setPrice(newPrice);
     }
     private void setUpdatedValues(OrderProduct currentOrderProduct, Product newProduct, int newProductQty){
         currentOrderProduct.setPrice(newProduct.getPrice());

@@ -8,7 +8,6 @@ public class Receipt {
     private int id;
     private List<ReceiptRecord> records;
     private BigDecimal totalSum;
- //   private static AtomicInteger count = new AtomicInteger(0);
 
     public Receipt(int id){
         records = new ArrayList<>();

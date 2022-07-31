@@ -28,7 +28,11 @@ public class OrderProduct {
             throw new IllegalArgumentException("Quantity can't be a negative number.");
     }
     public BigDecimal getPrice(){return price;}
-    public void setPrice(BigDecimal price){this.price = price; calculatePrice();}
+    public void setPrice(BigDecimal price){
+        if(price.compareTo(BigDecimal.ZERO) <0)
+            throw new IllegalArgumentException("Price cannot be negative.");
+        this.product.setPrice(price);
+        calculatePrice();}
     public OrderProductDiscount getDiscount(){return this.discount;}
     public void setDiscount(OrderProductDiscount discount){this.discount = discount;}
     public void calculatePrice(){

@@ -57,7 +57,7 @@ public class XForYDiscount extends Discount {
                 .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
 
-        var multiplier = (int) Math.floor(discountableQty / xQty);
+        var multiplier = (int) Math.floor(discountableQty / (float)xQty);
         var qtyToDiscount = (xQty - yQty)*multiplier;
         var mc = new MathContext(3);
 

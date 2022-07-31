@@ -17,9 +17,7 @@ public abstract class Discount {
     }
     public String getName(){return this.name;}
     public int getId(){return this.id;}
-    public List<Integer> getProductsIds(){
-        return this.productsIds;
-    }
+    public List<Integer> getProductsIds(){return this.productsIds;}
     public abstract boolean checkIfApplies(List<OrderProduct> discountedProducts);
     public abstract void calculateDiscountPrice(List<OrderProduct> discountedProducts);
 }

@@ -23,6 +23,7 @@ public abstract class Product {
 
     public LocalDate getCreationDate(){return this.creationDate;}
     public BigDecimal getPrice(){return this.price;}
+    public void setPrice(BigDecimal price){this.price = price;}
     public String getName(){return this.name;}
     public int getId(){return this.id;}
     public long getAgeInDays(){return DAYS.between(this.creationDate, LocalDate.now());}

@@ -35,7 +35,7 @@ public class OrderServiceTests {
     @Test
     void processOrder_withFixedPriceDiscountApplied_expectCreatedReceiptWithFixedPriceDiscounts(){
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
-        var belgBeerPack = new BeveragePack<Beer>("Belgium Six Pack", new BigDecimal(12),6, belgBeer, LocalDate.now());
+        var belgBeerPack = new BeveragePack<>("Belgium Six Pack", new BigDecimal(12), 6, belgBeer, LocalDate.now());
 
         var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<>(){{add(belgBeer.getId());}},
                 6, new BigDecimal(3), "Belgian Beer 6 for 3");
@@ -52,7 +52,7 @@ public class OrderServiceTests {
         var receipt = orderService.processOrder(testOrder.getId());
 
         assertAll("receipt",
-                () -> assertEquals(2,receipt.getRecords().stream().count()),
+                () -> assertEquals(2, (long) receipt.getRecords().size()),
                 () -> assertEquals(new BigDecimal(7).setScale(2, RoundingMode.DOWN),receipt.getTotalSum()),
 
                 () -> assertEquals(String.valueOf(BigDecimal.valueOf(-3.00).setScale(2, RoundingMode.DOWN)), receipt.getRecords().get(0).getDiscount()),
@@ -74,7 +74,7 @@ public class OrderServiceTests {
     @Test
     void processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts(){
         var mc = new MathContext(3);
-        var unitPrice = new BigDecimal(0.2, mc).stripTrailingZeros();
+        var unitPrice = new BigDecimal("0.2", mc).stripTrailingZeros();
         var carrot = new Vegetable("Carrot", unitPrice, LocalDate.now());
         var veggie100To500Discount = new PercentageDiscount(new ArrayList<>(){{add(carrot.getId());}},
                  100 , 500, 10, "Vegetables 100-500");
@@ -88,8 +88,8 @@ public class OrderServiceTests {
         var receipt = orderService.processOrder(testOrder.getId());
 
         assertAll("receipt",
-                () -> assertEquals(1,receipt.getRecords().stream().count()),
-                () -> assertEquals(new BigDecimal(21.6).setScale(2, RoundingMode.DOWN),receipt.getTotalSum()),
+                () -> assertEquals(1, (long) receipt.getRecords().size()),
+                () -> assertEquals(new BigDecimal("21.6").setScale(2, RoundingMode.DOWN),receipt.getTotalSum()),
 
                 () -> assertEquals(String.valueOf(BigDecimal.valueOf(-2.40).setScale(2, RoundingMode.DOWN)), receipt.getRecords().get(0).getDiscount()),
                 () -> assertEquals(carrot.getName(), receipt.getRecords().get(0).getName()),
@@ -113,7 +113,7 @@ public class OrderServiceTests {
         var receipt = orderService.processOrder(testOrder.getId());
 
         assertAll("receipt",
-                () -> assertEquals(1,receipt.getRecords().stream().count()),
+                () -> assertEquals(1, (long) receipt.getRecords().size()),
                 () -> assertEquals(new BigDecimal(6).setScale(2, RoundingMode.DOWN),receipt.getTotalSum()),
 
                 () -> assertEquals(String.valueOf(BigDecimal.valueOf(-3.00).setScale(2, RoundingMode.DOWN)), receipt.getRecords().get(0).getDiscount()),
@@ -145,5 +145,4 @@ public class OrderServiceTests {
                 () -> assertEquals(6, order.getQty())
         );
     }
-    //todo: cant create second receipt based on order
 }

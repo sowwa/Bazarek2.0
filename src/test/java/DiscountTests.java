@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DiscountTests {
     Order testOrder;
@@ -31,7 +31,7 @@ public class DiscountTests {
 
         var actualValue = belgBeerDiscount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, true);
+        assertTrue(actualValue);
     }
     @Test
     void checkIfApplies_fixedPriceDiscount_returnFalse(){
@@ -41,68 +41,68 @@ public class DiscountTests {
         testOrder.addProduct(belgBeer, 2);
         var actualValue = belgBeerDiscount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, false);
+        assertFalse(actualValue);
     }
     @Test
     void checkIfApplies_percentageDiscount_returnTrue(){
-        var carrot = new Vegetable("Carrot", new BigDecimal(0.1), LocalDate.now());
+        var carrot = new Vegetable("Carrot", new BigDecimal("0.1"), LocalDate.now());
         var veggie100To500Discount = new PercentageDiscount(new ArrayList<>(){{add(carrot.getId());}},
                 100 , 500, 7, "Vegetables 100-500");
         testOrder.addProduct(carrot, 200);
         var actualValue = veggie100To500Discount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, true);
+        assertTrue(actualValue);
     }
     @Test
     void checkIfApplies_percentageDiscountQtyLessThenMin_returnFalse(){
-        var carrot = new Vegetable("Carrot", new BigDecimal(0.67), LocalDate.now());
+        var carrot = new Vegetable("Carrot", new BigDecimal("0.67"), LocalDate.now());
         var veggie100To500Discount = new PercentageDiscount(new ArrayList<>(){{add(carrot.getId());}},
                 100 , 500, 7, "Vegetables 100-500");
         testOrder.addProduct(carrot, 34);
         var actualValue = veggie100To500Discount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, false);
+        assertFalse(actualValue);
     }
 
     @Test
     void checkIfApplies_percentageDiscountQtyMoreThenMax_returnFalse(){
-        var carrot = new Vegetable("Carrot", new BigDecimal(0.67), LocalDate.now());
+        var carrot = new Vegetable("Carrot", new BigDecimal("0.67"), LocalDate.now());
         var veggie100To500Discount = new PercentageDiscount(new ArrayList<>(){{add(carrot.getId());}},
                 100 , 500, 7, "Vegetables 100-500");
         testOrder.addProduct(carrot, 515);
         var actualValue = veggie100To500Discount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, false);
+        assertFalse(actualValue);
     }
 
     @Test
     void checkIfApplies_xForYDiscount_returnTrue(){
-        var whiteBread = new Bread("White", new BigDecimal(1.2), LocalDate.now().minusDays(3));
+        var whiteBread = new Bread("White", new BigDecimal("1.2"), LocalDate.now().minusDays(3));
         var twoForOneDiscount = new XForYDiscount(new ArrayList<>(){{add(whiteBread.getId());}},
                 2, 1, 3, "2for1");
         testOrder.addProduct(whiteBread, 2);
         var actualValue = twoForOneDiscount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, true);
+        assertTrue(actualValue);
     }
     @Test
-    void checkIfApplies_xForYDiscountNOtEnoughtQty_returnFalse(){
-        var whiteBread = new Bread("White", new BigDecimal(1.2), LocalDate.now().minusDays(3));
+    void checkIfApplies_xForYDiscountNotEnoughtQty_returnFalse(){
+        var whiteBread = new Bread("White", new BigDecimal("1.2"), LocalDate.now().minusDays(3));
         var twoForOneDiscount = new XForYDiscount(new ArrayList<>(){{add(whiteBread.getId());}},
                 2, 1, 3, "2for1");
         testOrder.addProduct(whiteBread, 1);
         var actualValue = twoForOneDiscount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, false);
+        assertFalse(actualValue);
     }
     @Test
     void checkIfApplies_xForYDiscountNotOldEnought_returnFalse(){
-        var whiteBread = new Bread("White", new BigDecimal(1.2), LocalDate.now().minusDays(1));
+        var whiteBread = new Bread("White", new BigDecimal("1.2"), LocalDate.now().minusDays(1));
         var twoForOneDiscount = new XForYDiscount(new ArrayList<>(){{add(whiteBread.getId());}},
                 2, 1, 3, "2for1");
         testOrder.addProduct(whiteBread, 2);
         var actualValue = twoForOneDiscount.checkIfApplies(testOrder.getOrderProducts());
 
-        assertEquals(actualValue, false);
+        assertFalse(actualValue);
     }
 }

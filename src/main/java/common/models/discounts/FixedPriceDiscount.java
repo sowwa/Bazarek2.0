@@ -2,7 +2,6 @@ package common.models.discounts;
 
 import common.models.order.OrderProduct;
 import common.models.order.OrderProductDiscount;
-import common.models.products.Product;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -11,7 +10,7 @@ import java.util.List;
 public class FixedPriceDiscount extends Discount{
     private BigDecimal fixedPrice;
     private int requiredQty;
-    private MathContext mc;
+    private final MathContext mc;
 
     public FixedPriceDiscount(List<Integer> productsIds, int requiredQty, BigDecimal fixedPrice, String name) {
         super(productsIds, name);
@@ -46,7 +45,7 @@ public class FixedPriceDiscount extends Discount{
                 .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
 
-        var discountMultiplicator = (int) Math.floor(discountableProductsQty / requiredQty) ;
+        var discountMultiplicator = (int) Math.floor(discountableProductsQty / (float)requiredQty) ;
 
         if(discountMultiplicator == 0)
             return;

@@ -6,6 +6,7 @@ import common.interfaces.IReceiptService;
 import common.models.order.Order;
 import common.models.receipt.Receipt;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,16 +25,15 @@ public class OrderService implements IOrderService {
 
     @Override
     public Order getOrder(int orderId) {
-        var order = orders.stream().filter(o -> o.getId() == orderId).findFirst().get();
-
-        if(order == null)
+        if(orders.stream().noneMatch(o -> o.getId() == orderId))
             throw new IllegalArgumentException("Order don't exists.");
 
-        return order;
+        return orders.stream().filter(o -> o.getId() == orderId).findFirst().get();
     }
 
+    @Override
     public Order addOrder(Order order){
-        if(!orders.stream().anyMatch(o -> o.getId() == order.getId())){
+        if(orders.stream().noneMatch(o -> o.getId() == order.getId())){
             orders.add(order);
             return order;
         }
@@ -47,6 +47,21 @@ public class OrderService implements IOrderService {
 
         var order = getOrder(orderId);
         order.modifyProductQty(productId, newQty);
+
+        var orderProducts = order.getOrderProducts();
+        discountService.removeDiscounts(orderProducts);
+        discountService.applyDiscounts(orderProducts);
+
+        return order;
+    }
+
+    @Override
+    public Order changeProductPrice(int orderId, int productId, BigDecimal newPrice) {
+        if(newPrice.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("Product price cannot be negative.");
+
+        var order = getOrder(orderId);
+        order.modifyProductPrice(productId, newPrice);
 
         var orderProducts = order.getOrderProducts();
         discountService.removeDiscounts(orderProducts);

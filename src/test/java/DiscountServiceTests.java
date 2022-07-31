@@ -2,6 +2,7 @@ import common.models.discounts.FixedPriceDiscount;
 import common.models.discounts.PercentageDiscount;
 import common.models.discounts.XForYDiscount;
 import common.models.order.Order;
+import common.models.order.OrderProductDiscount;
 import common.models.products.beverages.Beer;
 import common.models.products.food.Bread;
 import common.models.products.food.Vegetable;
@@ -27,7 +28,7 @@ public class DiscountServiceTests {
     }
 
     @Test
-    void applyDiscounts_fixedPriceDiscount_orderProducstWithFixedDiscount(){
+    void applyDiscounts_fixedPriceDiscount_orderProductsWithFixedDiscount(){
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
         var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<>(){{add(belgBeer.getId());}},
                 6, new BigDecimal(3), "Belgian Beer 6 for 3");
@@ -42,8 +43,8 @@ public class DiscountServiceTests {
     }
 
     @Test
-    void applyDiscounts_percentageDiscount_orderProducstWithFixedDiscount(){
-        var carrot = new Vegetable("Carrot", new BigDecimal(0.1), LocalDate.now());
+    void applyDiscounts_percentageDiscount_orderProductsWithFixedDiscount(){
+        var carrot = new Vegetable("Carrot", new BigDecimal("0.1"), LocalDate.now());
         var veggie100To500Discount = new PercentageDiscount(new ArrayList<>(){{add(carrot.getId());}},
                 100 , 500, 10, "Vegetables 100-500");
         testOrder.addProduct(carrot, 200);
@@ -57,7 +58,7 @@ public class DiscountServiceTests {
     }
 
     @Test
-    void applyDiscounts_xForYDiscount_orderProducstWithFixedDiscount(){
+    void applyDiscounts_xForYDiscount_orderProductsWithFixedDiscount(){
         var whiteBread = new Bread("White", new BigDecimal(4), LocalDate.now().minusDays(3));
         var twoForOneDiscount = new XForYDiscount(new ArrayList<>(){{add(whiteBread.getId());}},
                 2, 1, 3, "2for1");
@@ -72,27 +73,23 @@ public class DiscountServiceTests {
     }
 
     @Test
-    void removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount(){
+    void removeDiscounts_oneDiscountApplied_orderProductsWithoutDiscount(){
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
-        var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<>(){{add(belgBeer.getId());}},
-                6, new BigDecimal(3), "Belgian Beer 6 for 3");
         testOrder.addProduct(belgBeer, 6);
-        discountService.addDiscount(belgBeerDiscount);
-        discountService.applyDiscounts(testOrder.getOrderProducts());
+        testOrder.getProduct(belgBeer.getId()).setDiscount(new OrderProductDiscount("Test discount", new BigDecimal(-10)));
         discountService.removeDiscounts(testOrder.getOrderProducts());
 
-        assertEquals(null, testOrder.getProduct(belgBeer.getId()).getDiscount());
+        assertNull(testOrder.getProduct(belgBeer.getId()).getDiscount());
     }
 
     @Test
     void addDiscount_newDiscount_returnDiscount(){
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
-
         var belgBeerDiscount = new FixedPriceDiscount(new ArrayList<>(){{add(belgBeer.getId());}},
                 6, new BigDecimal(3), "Belgian Beer 6 for 3");
         discountService.addDiscount(belgBeerDiscount);
 
-        assertEquals(1, discountService.getDiscounts().stream().count());
+        assertEquals(1, (long) discountService.getDiscounts().size());
     }
 
     @Test
@@ -103,7 +100,7 @@ public class DiscountServiceTests {
                 6, new BigDecimal(3), "Belgian Beer 6 for 3");
         discountService.addDiscount(belgBeerDiscount);
 
-        Throwable ex = assertThrows(IllegalArgumentException.class, () -> {discountService.addDiscount(belgBeerDiscount);});
+        Throwable ex = assertThrows(IllegalArgumentException.class, () -> discountService.addDiscount(belgBeerDiscount));
 
         assertEquals("Discount already on list.", ex.getMessage());
     }
