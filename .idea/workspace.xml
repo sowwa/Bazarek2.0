@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Big refatoring part 1 : discounts methods clean up, date time -&gt; LocalDate">
+    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Order class refactoring and clen up +">
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IDiscountService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/ReceiptRecord.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/proccessing/DiscountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IDiscountFlow.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IReceiptService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" afterDir="false" />
@@ -14,10 +19,22 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Alcohol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Alcohol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beverage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/BeveragePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/BeveragePack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Bread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Bread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Vegetable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProductDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProductDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/FixedPriceDiscountFlow.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/proccessing/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/PercentageDiscountFlow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/ReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/proccessing/ReceiptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/XForYDiscountFlow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/OrderTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ServicesTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +223,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659184560991</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="More discounts methods clean up + warnings cleaning">
+      <created>1659189460785</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659189460785</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,28 +254,8 @@
     <MESSAGE value="Played with discounts and made a mess" />
     <MESSAGE value="Fix SixedproceDiscount + refactor program structure + name change: Cart =&gt; Order + some code cleaning" />
     <MESSAGE value="Big refatoring part 1 : discounts methods clean up, date time -&gt; LocalDate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Big refatoring part 1 : discounts methods clean up, date time -&gt; LocalDate" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="139" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="More discounts methods clean up + warnings cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="More discounts methods clean up + warnings cleaning" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Bazarek2$Main.ic" NAME="Main Coverage Results" MODIFIED="1659118439489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

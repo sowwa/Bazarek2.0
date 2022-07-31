@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class OrderTests {
+public class ServicesTests {
     @Test
     void addToCart(){
         Assertions.assertEquals(1,1);

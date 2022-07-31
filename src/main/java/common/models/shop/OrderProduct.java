@@ -3,52 +3,33 @@ package common.models.shop;
 import common.models.products.Product;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 public class OrderProduct {
-    public Product product;
-    public int qty; //todo: what about grams?
-    public BigDecimal price;
-    public BigDecimal discountValue; //todo: change to discount or sth to have it minus as a record on recipt
-    //todo: or maybe each product has discounted value
-    public OrderProductDiscount discount;//todo: make list, and rename
+    private Product product;
+    private int qty; //todo: what about grams?
+    private BigDecimal price;
+    private BigDecimal discountValue;
+    private OrderProductDiscount discount;//todo: make list, and rename
 
     public OrderProduct(Product product, int qty, OrderProductDiscount discount){
         this.product = product;
         this.qty = qty;
         this.discount = discount;
         this.discountValue = BigDecimal.ZERO;
-        this.price = product.price.multiply(new BigDecimal(qty));//todo: refactor this
+        this.price = product.getPrice().multiply(new BigDecimal(qty)).round(new MathContext(4));//todo: refactor this
     }
-
+    public Product getProduct(){return this.product;}
+    public int getQty(){return this.qty;}
+    public void setQty(int qty){this.qty = qty;}
+    public BigDecimal getDiscountValue(){return discountValue;}
+    public void setDiscountValue(BigDecimal discountValue){this.discountValue = discountValue;}
     public BigDecimal getPrice(){
         return price;
     }
-    public BigDecimal calculatePrice(){
-        return price.multiply(BigDecimal.valueOf(qty));
+    public OrderProductDiscount getDiscount(){return this.discount;}
+    public void setDiscount(OrderProductDiscount discount){this.discount = discount;}
+    public void calculatePrice(){
+        this.price = this.product.getPrice().multiply(new BigDecimal(this.qty));
     }
-
-    public BigDecimal calculateDiscountedPrice(){
-        //todo: choose the best discount
-        //DiscountedPrice = Discount.CalculateDiscountPrice();
-        //todo: what about different type of bread
-        return discountValue;
-    }
-
-   // public int AdjustQty(int diffQty){
-     //   Qty = Qty + diffQty;
-        //cannot be less then 0
-   // }
-
-    //todo: up/low qty add one, remove one, set to fix number
-
- //   public void CheckForDiscounts(){
-        //todo: check all discounts for product Id or for CartProduct
-   //     if(Discount != null && !Discount.Applied){ //make list chek if any on list
-
-   //     }
-        //todo: check if applied to other products in basket
-        //todo: check if condition met
-        //todo: apply if needed per CartProduct
-        //todo: return CartProducts(s)
-  //  }
 }

@@ -1,13 +1,12 @@
 package common.models.shop;
 
-import common.models.discounts.Discount;
-
 public class OrderProductDiscount {
-    public common.models.discounts.Discount discount;
-    public boolean applied;
+    private String discountName;
+    private boolean applied;//todo: delete I think, so this whole class unnesessary? unless a list of discounts?
 
-    public OrderProductDiscount(Discount discount, boolean applied){
-        this.discount = discount;
+    public OrderProductDiscount(String discountName, boolean applied){
+        this.discountName = discountName;
         this.applied = applied;
     }
+    public String getName(){return discountName;}
 }

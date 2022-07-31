@@ -1,48 +1,32 @@
 package common.models.shop;
 
+import common.models.products.Product;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Order {
-    public int id;
-    public List<OrderProduct> orderProducts;
+    private int id;
+    private List<OrderProduct> orderProducts;
     private static final AtomicInteger count = new AtomicInteger(0);
     public Order(){
         orderProducts = new ArrayList<>();
         id = count.incrementAndGet();
     }
-    //todo: make some interface for that or move to other class
-    public Iterable<OrderProduct> addToCart(OrderProduct product){//todo: make it Product and Qty separate args
-        // todo: see if already in cart
-        //todo: google try catch and error handling in java
-        //todo: check if product is already in backet
-        //todo: this way handle beerPack and beer - give them the same id
-        this.orderProducts.add(product);
-        //todo: check if discounts apply or should be removed
 
-        return this.orderProducts;
-    }
-
-    public void checkForDiscounts(OrderProduct orderProduct){
-        //todo: check all discounts for product Id or for CartProduct
-        if(orderProduct.discount != null && !orderProduct.discount.applied){
-            var otherProducts  = orderProducts.stream()
-                    .filter(p -> Objects.nonNull(p.discount))
-                    .filter(p -> p.discount.discount.id == orderProduct.discount.discount.id).toList(); //current product will be included
-            //todo: qtyincart
-           // var potentailDiscountedProducts = new ArrayList<CartProduct>(otherProducts);
-            var t = orderProduct.discount.discount.checkIfApplies(otherProducts);
-            orderProduct.discount.discount.calculateDiscountPrice(otherProducts);
-
+    public List<OrderProduct> getOrderProducts(){return this.orderProducts;}
+    public void addProduct(Product product, int qty){
+        if(orderProducts.stream().anyMatch(o -> o.getProduct().getId() == product.getId())){
+            orderProducts.stream().filter(o -> o.getProduct().getId() == product.getId())
+                    .forEach(o -> setUpdatedValues(o,qty));
         }
-        //discountList.stream().filter(d -> d.ProductsIds.contains(b1.Id)).findFirst().orElse(null);
-        //todo: check if applied to other products in basket
-        //todo: check if condition met
-        //todo: apply if needed per CartProduct
-        //todo: return CartProducts(s)
+        else{
+            this.orderProducts.add(new OrderProduct(product, qty, null));
+        }
     }
-
-    //check if any discounts apply?
+    private void setUpdatedValues(OrderProduct currentOrderProduct, int newProductQty){
+        currentOrderProduct.setQty(currentOrderProduct.getQty() + newProductQty);
+        currentOrderProduct.calculatePrice();
+    }
 }
