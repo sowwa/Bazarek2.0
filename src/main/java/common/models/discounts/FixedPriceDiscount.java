@@ -1,12 +1,10 @@
 package common.models.discounts;
 
 import common.models.shop.OrderProduct;
-import common.models.enums.Unit;
 import common.models.shop.OrderProductDiscount;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.List;
 
 public class FixedPriceDiscount extends Discount{
@@ -14,17 +12,17 @@ public class FixedPriceDiscount extends Discount{
     private int requiredQty;
     private MathContext mc;
 
-    public FixedPriceDiscount(List<Integer> productsIds, Unit productUnit, int requiredQty, BigDecimal fixedPrice, String name) {
-        super(productsIds, productUnit, name);
+    public FixedPriceDiscount(List<Integer> productsIds, int requiredQty, BigDecimal fixedPrice, String name) {
+        super(productsIds, name);
         this.requiredQty = requiredQty;
         this.fixedPrice = fixedPrice;
-        this.mc = new MathContext(2, RoundingMode.DOWN);
+        this.mc = new MathContext(3);
     }
 
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
         var discountableQty = (Integer) discountedProducts.stream()
-                .map(p -> p.getQty())
+                .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
         if(requiredQty == 0)
             return true; //todo: make sure no exception, or make sure req qty musyt be at least 1
@@ -35,7 +33,7 @@ public class FixedPriceDiscount extends Discount{
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
         var discontableProductsQty = (Integer) discountedProducts.stream()
-                .map(p -> p.getQty())
+                .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
 
         var discountMult = (int) Math.floor(discontableProductsQty / requiredQty) ;
@@ -59,7 +57,7 @@ public class FixedPriceDiscount extends Discount{
                     .multiply(product.getProduct().getPrice());
             var discountedQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount).equals(BigDecimal.ZERO)
                     ? remainingDiscountedPrice
-                    : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedPrice);
+                    : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedPrice,mc);
 
             var productPrice = notDiscountedQtyPrice.add(discountedQtyPrice);
 

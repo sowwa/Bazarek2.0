@@ -1,6 +1,5 @@
 package common.models.products;
 
-import common.models.enums.Unit;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.time.LocalDate;
@@ -11,14 +10,12 @@ public abstract class Product {
     private String name;
     private BigDecimal price;
     private LocalDate creationDate;
-    private Unit unit;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    public Product(String name, BigDecimal price, LocalDate creationDate, Unit unit){
+    public Product(String name, BigDecimal price, LocalDate creationDate){
         this.name = name;
         this.price = price.round(new MathContext(3));
         this.creationDate = creationDate;
-        this.unit = unit;
         id = count.incrementAndGet();
     }
 

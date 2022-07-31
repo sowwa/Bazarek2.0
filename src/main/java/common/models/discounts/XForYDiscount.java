@@ -1,7 +1,6 @@
 package common.models.discounts;
 
 import common.models.shop.OrderProduct;
-import common.models.enums.Unit;
 import common.models.shop.OrderProductDiscount;
 
 import java.math.BigDecimal;
@@ -16,8 +15,8 @@ public class XForYDiscount extends Discount {
     private int yQty;
     private int daysOld;
 
-    public XForYDiscount(List<Integer> ProductsIds, Unit ProductUnit, int xQty, int yQty, int daysOld, String name) {
-        super(ProductsIds, ProductUnit, name);
+    public XForYDiscount(List<Integer> ProductsIds, int xQty, int yQty, int daysOld, String name) {
+        super(ProductsIds, name);
         this.xQty = xQty;
         this.yQty = yQty;
         this.daysOld = daysOld;

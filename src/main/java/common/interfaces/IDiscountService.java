@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface IDiscountService {
 
-    void ApplyDiscounts(List<OrderProduct> orderProducts); //make async?
-
+    void ApplyDiscounts(List<OrderProduct> orderProducts);
     default void removeDiscount(List<OrderProduct> discountedProducts){
         for (var product: discountedProducts) {
             product.setDiscountValue(null);

@@ -1,7 +1,6 @@
 package common.models.discounts;
 
 import common.models.shop.OrderProduct;
-import common.models.enums.Unit;
 import common.models.shop.OrderProductDiscount;
 
 import java.math.BigDecimal;
@@ -12,8 +11,8 @@ public class PercentageDiscount extends Discount{
     private Integer minQty; //todo: let change values??
     private Integer maxQty;
     private float percentageOff;
-    public PercentageDiscount(List<Integer> productsIds, Unit productUnit, Integer minQty, Integer maxQty, float percentageOff, String name) {
-        super(productsIds, productUnit, name);
+    public PercentageDiscount(List<Integer> productsIds, Integer minQty, Integer maxQty, float percentageOff, String name) {
+        super(productsIds, name);
         this.minQty = minQty;
         this.maxQty = maxQty;
         this.percentageOff = percentageOff;

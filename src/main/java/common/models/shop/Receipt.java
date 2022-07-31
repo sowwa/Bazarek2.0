@@ -17,6 +17,9 @@ public class Receipt {
     }
 
     public List<ReceiptRecord> getRecords(){return this.records;}
+    public int getId(){return this.id ;}
+    public BigDecimal getTotalSum(){return this.totalSum ;}
+
     public void setTotalSum(BigDecimal totalSum){this.totalSum = totalSum;}
     public void print(){
         System.out.println("\n\n\nReceipt " + id );
