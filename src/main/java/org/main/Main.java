@@ -105,9 +105,5 @@ public class Main {
         var receiptOfOrder3 = orderService.processOrder(3);
         receiptOfOrder3.print();
 
-        var console = System.console();
-        if(console != null){
-            console.writer().println("Test console displaying");
-        }
     }
 }
