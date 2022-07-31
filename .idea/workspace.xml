@@ -4,28 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Order class refactoring and clean up + program structure refactoring + a lot of refactoring and code cleaning">
-      <change afterPath="$PROJECT_DIR$/src/test/java/OrderServiceTests.java" afterDir="false" />
+    <list default="true" id="12469d6e-f6fa-43e0-a33b-772e3c661ab4" name="Changes" comment="Remove Unit to make it simple + add first unit tests">
+      <change afterPath="$PROJECT_DIR$/src/main/java/common/models/order/OrderProductDiscount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DiscountServiceTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DiscountTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/OrderTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ReceiptTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IDiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IDiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/interfaces/IReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/interfaces/IReceiptService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/Discount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/FixedPriceDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/PercentageDiscount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/discounts/XForYDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/enums/Unit.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Alcohol.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Alcohol.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/Beverage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/BeveragePack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/beverages/BeveragePack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Bread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Bread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/products/food/Vegetable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/products/food/Vegetable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/ReceiptRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/shop/ReceiptRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/order/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/order/OrderProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/OrderProductDiscount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/Receipt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/receipt/Receipt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/common/models/shop/ReceiptRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/models/receipt/ReceiptRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ServicesTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ServicesTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/DiscountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/proccessing/DiscountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/proccessing/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/proccessing/ReceiptService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/proccessing/ReceiptService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/OrderServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/OrderServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ServicesTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +54,11 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Bazarek2" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Bazarek2" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
             <select />
@@ -100,21 +110,8 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.main.Main" />
-      <module name="Bazarek2.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="OrderServiceTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.DiscountServiceTests.removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount">
+    <configuration name="DiscountServiceTests.applyDiscounts_fixedPriceDiscount_orderProducstWithFixedDiscount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -127,7 +124,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;OrderServiceTests&quot;" />
+            <option value="&quot;DiscountServiceTests.applyDiscounts_fixedPriceDiscount_orderProducstWithFixedDiscount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -137,7 +134,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="OrderServiceTests.processOrder_withFixedPriceDiscountApplied_expectCreatedReceiptWithFixedPriceDiscounts" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DiscountServiceTests.applyDiscounts_percentageDiscount_orderProducstWithFixedDiscount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -150,7 +147,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;OrderServiceTests.processOrder_withFixedPriceDiscountApplied_expectCreatedReceiptWithFixedPriceDiscounts&quot;" />
+            <option value="&quot;DiscountServiceTests.applyDiscounts_percentageDiscount_orderProducstWithFixedDiscount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -160,7 +157,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="OrderServiceTests.processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DiscountServiceTests.applyDiscounts_xForYDiscount_orderProducstWithFixedDiscount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -173,7 +170,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;OrderServiceTests.processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts&quot;" />
+            <option value="&quot;DiscountServiceTests.applyDiscounts_xForYDiscount_orderProducstWithFixedDiscount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -183,7 +180,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="OrderServiceTests.processOrder_withXForYDiscountApplied_expectCreatedReceiptWithXForYDiscounts" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="DiscountServiceTests.removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -196,7 +193,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;OrderServiceTests.processOrder_withXForYDiscountApplied_expectCreatedReceiptWithXForYDiscounts&quot;" />
+            <option value="&quot;DiscountServiceTests.removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -229,21 +226,42 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Tests in 'Bazarek2.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.ServicesTests" />
-      <item itemvalue="Gradle.OrderServiceTests" />
-      <item itemvalue="Gradle.OrderServiceTests.processOrder_withFixedPriceDiscountApplied_expectCreatedReceiptWithFixedPriceDiscounts" />
-      <item itemvalue="Gradle.OrderServiceTests.processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts" />
-      <item itemvalue="Gradle.OrderServiceTests.processOrder_withXForYDiscountApplied_expectCreatedReceiptWithXForYDiscounts" />
+      <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_fixedPriceDiscount_orderProducstWithFixedDiscount" />
+      <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_percentageDiscount_orderProducstWithFixedDiscount" />
+      <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_xForYDiscount_orderProducstWithFixedDiscount" />
+      <item itemvalue="Gradle.DiscountServiceTests.removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount" />
+      <item itemvalue="Gradle.Tests in 'Bazarek2.test'" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.OrderServiceTests" />
-        <item itemvalue="Gradle.OrderServiceTests.processOrder_withXForYDiscountApplied_expectCreatedReceiptWithXForYDiscounts" />
-        <item itemvalue="Gradle.OrderServiceTests.processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts" />
-        <item itemvalue="Gradle.OrderServiceTests.processOrder_withFixedPriceDiscountApplied_expectCreatedReceiptWithFixedPriceDiscounts" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.DiscountServiceTests.removeDiscounts_oneDiscountApplied_orderProducstWithoutDiscount" />
+        <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_xForYDiscount_orderProducstWithFixedDiscount" />
+        <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_percentageDiscount_orderProducstWithFixedDiscount" />
+        <item itemvalue="Gradle.DiscountServiceTests.applyDiscounts_fixedPriceDiscount_orderProducstWithFixedDiscount" />
+        <item itemvalue="Gradle.Tests in 'Bazarek2.test'" />
       </list>
     </recent_temporary>
   </component>
@@ -333,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659227472720</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Remove Unit to make it simple + add first unit tests">
+      <created>1659236537657</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1659236537657</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -359,22 +384,95 @@
     <MESSAGE value="Big refatoring part 1 : discounts methods clean up, date time -&gt; LocalDate" />
     <MESSAGE value="More discounts methods clean up + warnings cleaning" />
     <MESSAGE value="Order class refactoring and clean up + program structure refactoring + a lot of refactoring and code cleaning" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order class refactoring and clean up + program structure refactoring + a lot of refactoring and code cleaning" />
+    <MESSAGE value="Remove Unit to make it simple + add first unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove Unit to make it simple + add first unit tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/OrderServiceTests.java</url>
-          <line>72</line>
-          <properties class="OrderServiceTests" method="processOrder_withPercentagePriceDiscountApplied_expectCreatedReceiptWithPercentagePriceDiscounts">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/main/Main.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="273" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="304" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="305" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="306" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="307" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="308" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="309" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="310" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/proccessing/OrderService.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="311" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/order/Order.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="330" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/order/Order.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/order/Order.java</url>
+          <line>23</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
           </properties>
-          <option name="timeStamp" value="241" />
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/order/Order.java</url>
+          <line>24</line>
+          <properties>
+            <option name="lambda-ordinal" value="-1" />
+          </properties>
+          <option name="timeStamp" value="333" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/common/models/order/Order.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="334" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="common.models.products.food.Bread" memberName="id" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Bazarek2$Main.ic" NAME="Main Coverage Results" MODIFIED="1659118439489" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

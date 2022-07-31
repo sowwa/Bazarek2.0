@@ -5,6 +5,8 @@ import java.math.MathContext;
 import java.time.LocalDate;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public abstract class Product {
     private final int id;
     private String name;
@@ -23,4 +25,5 @@ public abstract class Product {
     public BigDecimal getPrice(){return this.price;}
     public String getName(){return this.name;}
     public int getId(){return this.id;}
+    public long getAgeInDays(){return DAYS.between(this.creationDate, LocalDate.now());}
 }

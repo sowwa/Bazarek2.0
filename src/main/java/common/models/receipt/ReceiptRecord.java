@@ -1,4 +1,4 @@
-package common.models.shop;
+package common.models.receipt;
 
 import java.math.BigDecimal;
 
@@ -13,9 +13,9 @@ public class ReceiptRecord {
     public ReceiptRecord(String name, int qty, BigDecimal unitPrice, BigDecimal fullPrice, BigDecimal discount, String discountName) {
         this.name = name;
         this.qty = String.valueOf(qty);
-        this.unitPrice = unitPrice.stripTrailingZeros().toPlainString();
-        this.fullPrice = fullPrice.stripTrailingZeros().toPlainString();
-        this.discount = discount.stripTrailingZeros().toPlainString();
+        this.unitPrice = unitPrice.toPlainString();
+        this.fullPrice = fullPrice.toPlainString();
+        this.discount = discount != null ? discount.toPlainString() : "";
         this.discountName = discountName;
     }
     public String getName(){return this.name;}
@@ -30,7 +30,7 @@ public class ReceiptRecord {
                 + qty + "*" + unitPrice + "   "
                 + fullPrice);
 
-        if(!discount.equals("0"))
+        if(!discount.equals(""))
             System.out.println("Discount: " + discountName + "   " + discount);
     }
 }

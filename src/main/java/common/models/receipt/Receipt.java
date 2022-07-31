@@ -1,21 +1,21 @@
-package common.models.shop;
+package common.models.receipt;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Receipt {
     private int id;
     private List<ReceiptRecord> records;
     private BigDecimal totalSum;
-    private static AtomicInteger count = new AtomicInteger(0);
+ //   private static AtomicInteger count = new AtomicInteger(0);
 
-    public Receipt(){
+    public Receipt(int id){
         records = new ArrayList<>();
-        id = count.incrementAndGet();
+        this.id = id;
     }
 
+    public void addRecord(ReceiptRecord receiptRecord){records.add(receiptRecord);}
     public List<ReceiptRecord> getRecords(){return this.records;}
     public int getId(){return this.id ;}
     public BigDecimal getTotalSum(){return this.totalSum ;}

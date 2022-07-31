@@ -1,15 +1,16 @@
 package common.interfaces;
 
-import common.models.shop.OrderProduct;
+import common.models.discounts.Discount;
+import common.models.order.OrderProduct;
 
 import java.util.List;
 
 public interface IDiscountService {
-
-    void ApplyDiscounts(List<OrderProduct> orderProducts);
-    default void removeDiscount(List<OrderProduct> discountedProducts){
-        for (var product: discountedProducts) {
-            product.setDiscountValue(null);
+    void applyDiscounts(List<OrderProduct> orderProducts);
+    Discount addDiscount(Discount discount);
+    List<Discount> getDiscounts();
+    default void removeDiscounts(List<OrderProduct> orderProducts){
+        for (var product: orderProducts) {
             product.setDiscount(null);
         }
     }

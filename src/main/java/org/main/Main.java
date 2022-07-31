@@ -7,7 +7,7 @@ import common.models.discounts.FixedPriceDiscount;
 import common.models.products.beverages.BeveragePack;
 import common.models.products.food.Bread;
 import common.models.products.food.Vegetable;
-import common.models.shop.Order;
+import common.models.order.Order;
 import proccessing.DiscountService;
 import proccessing.OrderService;
 import proccessing.ReceiptService;
@@ -20,6 +20,7 @@ public class Main {
     public static void main(String[] args) {
         //todo: get carts/receipt from file or hardcode
         //todo: apply discounts (maybe get products, add to cart, check discounts, make checkout print receipts)
+        //todo: make three orders
 
         var belgBeer = new Beer("Belgium", new BigDecimal(1), LocalDate.now());
         var dutchBeer = new Beer("Dutch", new BigDecimal(5), LocalDate.now());
@@ -79,7 +80,8 @@ public class Main {
 
         var orderService = new OrderService(receiptService, discountService);
 
-        var receiptOfOrder1 = orderService.ProcessOrder(order1);
+        orderService.addOrder(order1);
+        var receiptOfOrder1 = orderService.processOrder(1);
 
         receiptOfOrder1.print();
 

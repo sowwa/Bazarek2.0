@@ -1,7 +1,8 @@
 package common.models.discounts;
 
-import common.models.shop.OrderProduct;
-import common.models.shop.OrderProductDiscount;
+import common.models.order.OrderProduct;
+import common.models.order.OrderProductDiscount;
+import common.models.products.Product;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -14,67 +15,75 @@ public class FixedPriceDiscount extends Discount{
 
     public FixedPriceDiscount(List<Integer> productsIds, int requiredQty, BigDecimal fixedPrice, String name) {
         super(productsIds, name);
-        this.requiredQty = requiredQty;
-        this.fixedPrice = fixedPrice;
-        this.mc = new MathContext(3);
+        this.setRequiredQty(requiredQty);
+        this.setFixedPrice(fixedPrice);
+        this.mc = new MathContext(4);
     }
 
+    public void setRequiredQty(int requiredQty){
+        if(requiredQty > 0)
+            this.requiredQty = requiredQty;
+        else throw new IllegalArgumentException("Required quantity can't be a negative number.");
+    }
+
+    public void setFixedPrice(BigDecimal fixedPrice){
+        if(fixedPrice.compareTo(BigDecimal.ZERO) > 0)
+            this.fixedPrice = fixedPrice;
+        else throw new IllegalArgumentException("Price can't be a negative number.");
+    }
     @Override
     public boolean checkIfApplies(List<OrderProduct> discountedProducts){
         var discountableQty = (Integer) discountedProducts.stream()
                 .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
-        if(requiredQty == 0)
-            return true; //todo: make sure no exception, or make sure req qty musyt be at least 1
 
         return discountableQty / requiredQty >= 1;
     }
 
     @Override
     public void calculateDiscountPrice(List<OrderProduct> discountedProducts) {
-        var discontableProductsQty = (Integer) discountedProducts.stream()
+        var discountableProductsQty = (Integer) discountedProducts.stream()
                 .map(OrderProduct::getQty)
                 .mapToInt(Integer::intValue).sum();
 
-        var discountMult = (int) Math.floor(discontableProductsQty / requiredQty) ;
+        var discountMultiplicator = (int) Math.floor(discountableProductsQty / requiredQty) ;
 
-        if(discountMult == 0)
+        if(discountMultiplicator == 0)
             return;
 
-        var discountedPrice = fixedPrice.multiply(new BigDecimal(discountMult)); //todo: can fixed proce be 0
-        var remainingDiscountedPrice = fixedPrice.multiply(new BigDecimal(discountMult));
+        var discountedProductsPrice = fixedPrice.multiply(new BigDecimal(discountMultiplicator));
+        var remainingDiscountedProductsPrice = fixedPrice.multiply(new BigDecimal(discountMultiplicator));
 
-        var discountedProductsQty = new BigDecimal(discountMult * requiredQty);
-        var productsLeftToDiscountQty = new BigDecimal(discountMult * requiredQty);
+        var discountedProductsQty = new BigDecimal(discountMultiplicator * requiredQty);
+        var productsLeftToDiscountQty = new BigDecimal(discountMultiplicator * requiredQty);
 
         for(var product : discountedProducts){
+            if(productsLeftToDiscountQty.equals(BigDecimal.ZERO))
+                break;
 
             var productQty = new BigDecimal(product.getQty());
 
-            var productQtyToDiscount = GetProductQtyToDiscount(productsLeftToDiscountQty, productQty);
-            var notDiscountedQtyPrice = productQty
+            var productQtyToDiscount = getProductQtyToDiscount(productsLeftToDiscountQty, productQty);
+
+            var notDiscountedProductQtyPrice = productQty
                     .subtract(productQtyToDiscount)
                     .multiply(product.getProduct().getPrice());
-            var discountedQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount).equals(BigDecimal.ZERO)
-                    ? remainingDiscountedPrice
-                    : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedPrice,mc);
+            var discountedProductQtyPrice = productsLeftToDiscountQty.subtract(productQtyToDiscount).equals(BigDecimal.ZERO)
+                    ? remainingDiscountedProductsPrice
+                    : productQtyToDiscount.divide(discountedProductsQty,mc).multiply(discountedProductsPrice,mc);
 
-            var productPrice = notDiscountedQtyPrice.add(discountedQtyPrice);
+            var productPrice = notDiscountedProductQtyPrice.add(discountedProductQtyPrice);
 
-            product.setDiscountValue(product.getPrice()
+            product.setDiscount(new OrderProductDiscount(this.name, product.getPrice()
                     .subtract(productPrice)
-                    .multiply(new BigDecimal(-1)));
-            product.setDiscount(new OrderProductDiscount(this.name,true));
+                    .multiply(new BigDecimal(-1))));
 
             productsLeftToDiscountQty = productsLeftToDiscountQty.subtract(productQtyToDiscount);
-            remainingDiscountedPrice = remainingDiscountedPrice.subtract(discountedQtyPrice);
-
-            if(productsLeftToDiscountQty.equals(BigDecimal.ZERO))
-                break;
+            remainingDiscountedProductsPrice = remainingDiscountedProductsPrice.subtract(discountedProductQtyPrice);
         }
     }
 
-    private BigDecimal GetProductQtyToDiscount(BigDecimal productsLeftToDiscountQty, BigDecimal productQty){
+    private BigDecimal getProductQtyToDiscount(BigDecimal productsLeftToDiscountQty, BigDecimal productQty){
         return productsLeftToDiscountQty.compareTo(productQty) < 0
                 ? productsLeftToDiscountQty
                 : productQty;

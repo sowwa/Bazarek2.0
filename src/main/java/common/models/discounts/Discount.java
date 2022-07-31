@@ -1,6 +1,6 @@
 package common.models.discounts;
 
-import common.models.shop.OrderProduct;
+import common.models.order.OrderProduct;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -16,6 +16,7 @@ public abstract class Discount {
         id = count.incrementAndGet();
     }
     public String getName(){return this.name;}
+    public int getId(){return this.id;}
     public List<Integer> getProductsIds(){
         return this.productsIds;
     }
